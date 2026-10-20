@@ -705,7 +705,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   z-index: 0;
   right: -48px;
   top: -150px;
-  width: clamp(260px, 26vw, 410px);
+  width: clamp(260px, 26vw, 396px);
   height: auto;
   pointer-events: none;
 }
@@ -799,115 +799,252 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 /* ==========================================================================
    АДАПТИВ
-   Все переопределения для узких экранов — в конце файла: медиазапрос не
-   имеет приоритета над обычным правилом, написанным ниже по файлу.
+   Четыре режима, каждый со своей композицией — не растянутый десктоп:
+     1500+      десктоп, как в макете;
+     980–1499   компактный десктоп: та же раскладка в три колонки, плотнее;
+     600–979    планшет: карточки идут строками «текст слева, картинка справа»;
+     до 600     телефон: всё в одну колонку, картинки под текстом.
+   Переопределения стоят в конце файла: медиазапрос не перебивает обычное
+   правило, написанное ниже по файлу.
    ========================================================================== */
-@media (max-width: 1240px) {
-  .why-card, .stage { padding: 40px 36px; }
-  .why-card__mark { font-size: 160px; }
-  .tariffs__note { right: 26%; font-size: 26px; }
-  .perks li { padding: 4px 12px; }
+
+/* ---------- компактный десктоп и всё, что уже ---------- */
+@media (max-width: 1499px) {
+  .why-card, .stage { padding: 36px 32px; }
+  .why-card__mark { font-size: 150px; }
+  .tariffs__note { right: 27%; font-size: 26px; }
+
+  .hero__grid { grid-template-columns: .9fr 1.1fr; }
+  .btn--xl { min-height: 72px; padding: 0 40px; font-size: 20px; }
+  .hero__features { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; }
+  .hero__features li { padding: 0 14px; font-size: 13.5px; gap: 10px; }
+  .hero__features .ring { width: 46px; height: 46px; box-shadow: 0 0 0 5px rgba(225, 18, 27, .08), var(--shadow-sm); }
+
+  /* фигура в «6–7» привязана к ширине карточки, а не к высоте: иначе на узкой
+     колонке она шире самой карточки и наезжает на текст */
+  .stage--light { min-height: 620px; }
+  .stage__img--coach { height: auto; width: 82%; right: -8%; }
+
+  /* «02»: фото уходит в нижнюю половину карточки, текст над ним на чистой стене */
+  .why-card { min-height: 580px; }
+  .why-card--photo .why-card__title, .why-card--photo .why-card__text { max-width: none; }
+  .why-card--photo .why-card__img {
+    inset: auto 0 0 0;
+    height: 56%;
+    object-position: 74% 50%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 9%);
+  }
+  .why-card--photo .why-card__num { color: #d6d2cf; text-shadow: none; }
+
+  /* клубный тариф: место под фото держат только заголовок и описание,
+     сроки идут во всю ширину карточки */
+  .tariff__top { padding-right: 0; }
+  .tariff__coach { width: clamp(200px, 18vw, 260px); top: -140px; right: -34px; }
+  .tariffs__note { right: 24%; }
+  .tariff--club .pill, .tariff--club .tariff__name, .tariff__desc { margin-right: clamp(200px, 24vw, 280px); }
+  .period__per { white-space: nowrap; }
+
+  .coach__stats li { padding: 26px 20px; }
+  .coach__stats .coach__stat-word { font-size: clamp(20px, 2vw, 30px); }
+
+  .tariffs__grid { grid-template-columns: minmax(280px, 330px) minmax(0, 1fr); }
+  .tariff { padding: 34px 30px; }
+  .tariff--club { padding: 34px 34px 30px; }
+  .perks { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 0; }
+  .perks li:nth-child(odd) { border-left: 0; }
 }
 
-@media (max-width: 1100px) {
-  .why__grid { grid-template-columns: 1fr 1fr; }
-  .why-card--white { grid-column: 1 / -1; min-height: 0; }
-  .plan__grid { grid-template-columns: 1fr 1fr; }
-  .stage--light { grid-column: 1 / -1; min-height: 480px; }
-  .stage--light .stage__img--coach { right: 6%; }
-  .tariffs__grid { grid-template-columns: minmax(0, 1fr); }
-  .tariff--solo { max-width: 560px; }
-  .coach__stats { grid-template-columns: 1fr; }
-  .coach__stats li { padding: 24px 26px; }
-}
+/* ---------- планшет ---------- */
+@media (max-width: 979px) {
+  .wrap { width: min(100% - 48px, var(--wrap)); }
+  .section { padding: 80px 0; }
+  .why .title, .plan .title, .plan .lead { padding-left: 0; }
 
-@media (max-width: 899px) {
-  .wrap { width: min(100% - 40px, var(--wrap)); }
-  .section { padding: 72px 0; }
-
-  /* первый экран: фото сверху, текст на светлом фоне ниже */
+  /* первый экран: горизонтальный кадр сверху, текст под ним */
   .hero { min-height: 0; background: var(--paper); }
   .hero::after { display: none; }
-  .hero__media { position: relative; display: block; height: 125vw; max-height: 680px; }
+  .hero__media { position: relative; display: block; height: 62vw; }
+  .hero__bg { object-position: 26% 70%; }
+  .hero__lines { display: none; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .hero__content { grid-column: 1; margin-top: -30px; padding-bottom: 56px; }
+  .hero__title { font-size: clamp(72px, 15vw, 120px); }
+  .hero__lead { max-width: 22em; }
+  .hero__text { max-width: 34em; }
+  .hero__lead { font-size: clamp(20px, 2.9vw, 26px); }
+  .hero__text { font-size: 16.5px; }
+  .hero__actions { gap: 16px 24px; }
+  .btn--xl { min-height: 64px; padding: 0 30px; font-size: 18px; }
+  .hero__start { padding-left: 0; border-left: 0; flex-direction: row; align-items: baseline; gap: 10px; }
+  .hero__start b { margin: 0; font-size: 24px; }
+  .hero__features { grid-template-columns: repeat(3, auto); margin-top: 32px; }
+  .hero__features li { font-size: 14px; }
+  .hero__logo { width: 120px; left: auto; right: 24px; }
+
+  /* карточки строками: текст в левой половине, картинка в правой */
+  .why__grid, .plan__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 0; }
+  .why-card, .stage { min-height: 380px; padding: 40px 52% 40px 36px; }
+  .why-card__title, .stage__title { font-size: clamp(28px, 4.2vw, 38px); max-width: none; }
+  .why-card__text, .stage__text { max-width: none; }
+  .stage--light .stage__title, .stage--light .stage__text { max-width: none; }
+
+  .why-card__mark { left: auto; right: -12px; bottom: -28px; font-size: 190px; }
+  .why-card--photo .why-card__title, .why-card--photo .why-card__text { max-width: none; }
+  .why-card--photo .why-card__img {
+    inset: 0 0 0 auto;
+    width: 56%;
+    height: 100%;
+    object-position: 72% 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 22%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 22%);
+  }
+  .why-card--photo .why-card__num { color: #d6d2cf; text-shadow: none; }
+  /* «03» без картинки: заголовок слева, пояснение справа */
+  .why-card--white {
+    min-height: 0;
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    align-items: end;
+  }
+  .why-card--white .why-card__num { grid-column: 1; grid-row: 1; }
+  .why-card--white .why-card__title { grid-column: 1; grid-row: 2; }
+  .why-card--white .why-card__text { grid-column: 2; grid-row: 2; margin: 0; }
+
+  .stage__img--legs { inset: 0 0 0 auto; width: 54%; height: 100%; object-position: 70% 100%; }
+  .stage__loop { left: auto; right: 5%; bottom: 16%; width: 44%; }
+  .stage--light { min-height: 400px; overflow: hidden; }
+  .stage__img--coach { width: auto; height: 104%; right: 9%; }
+
+  .coach { display: block; min-height: 0; padding-top: 0; }
+  .coach__photo { position: relative; width: 100%; height: min(80vw, 680px); }
+  .coach__photo img {
+    object-position: 40% 18%;
+    -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
+  .coach__grid { grid-template-columns: minmax(0, 1fr); margin-top: -10px; }
+  .coach__content { grid-column: 1; }
+
+  .tariffs__note { right: 4%; top: -40px; font-size: 24px; }
+  .tariffs__note svg { display: none; }
+  .tariffs__grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  /* «Только интенсив» во всю ширину, раскладка в две колонки:
+     что входит — слева, цена и кнопка — справа */
+  .tariff--solo {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: 40px;
+    align-items: start;
+    padding: 36px;
+  }
+  .tariff--solo > .pill { grid-column: 1; grid-row: 1; }
+  .tariff--solo .tariff__name { grid-column: 1; grid-row: 2; }
+  .tariff--solo .tariff__term { grid-column: 1; grid-row: 3; }
+  .tariff--solo .checks { grid-column: 1; grid-row: 4; border: 0; padding: 0; margin-top: 26px; }
+  .tariff--solo .tariff__price { grid-column: 2; grid-row: 1 / span 3; align-self: end; margin: 0 0 22px; }
+  .tariff--solo .btn { grid-column: 2; grid-row: 4; align-self: start; margin-top: 26px; }
+  .tariff--solo .tariff__hint { grid-column: 2; grid-row: 5; margin-top: 18px; }
+
+  .tariff--club { padding: 36px 36px 32px; }
+  .tariff__coach { width: 186px; top: -74px; right: -18px; }
+  .periods { margin-top: 40px; }
+  .tariff--club::before { width: 300px; height: 300px; right: -60px; top: -20px; }
+  .tariff--club .pill, .tariff--club .tariff__name, .tariff__desc { margin-right: 200px; }
+  .features { gap: 22px 28px; }
+}
+
+/* ---------- телефон ---------- */
+@media (max-width: 599px) {
+  .wrap { width: min(100% - 40px, var(--wrap)); }
+  .section { padding: 64px 0; }
+
+  /* первый экран: фото сверху, текст под ним */
+  .hero { background: var(--paper); }
+  .hero::after { display: none; }
+  .hero__media { height: 125vw; }
   .hero__bg { object-position: 50% 100%; }
   .hero__lines { display: none; }
-  .hero__logo { width: 112px; top: 20px; left: 20px; }
-  .hero__grid { grid-template-columns: 1fr; padding: 0; }
-  .hero__content { grid-column: 1; margin-top: -54px; padding-bottom: 36px; }
+  .hero__logo { width: 108px; top: 20px; left: auto; right: 20px; }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); padding: 0; }
+  .hero__content { margin-top: -54px; padding-bottom: 40px; }
   .hero__badge { padding: 11px 24px; }
-  .hero__title { font-size: clamp(64px, 20vw, 120px); }
-  .hero__actions { gap: 18px 24px; }
-  .btn--xl { min-height: 70px; padding: 0 34px; }
-  .hero__features {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-    margin-top: 34px;
-  }
+  .hero__title { font-size: clamp(64px, 20vw, 110px); }
+  .btn--xl { width: 100%; min-height: 66px; }
+  .hero__features { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 28px; }
   .hero__features li { padding: 0; }
   .hero__features li + li { border-left: 0; }
-  .ring { width: 60px; height: 60px; box-shadow: 0 0 0 6px rgba(225, 18, 27, .08); }
-  .ring svg { width: 28px; height: 28px; }
 
-  .why .title, .plan .title, .plan .lead { padding-left: 0; }
-  .why__grid, .plan__grid { grid-template-columns: 1fr; }
-  .why-card--white, .stage--light { grid-column: auto; }
-  .why-card { min-height: 0; padding: 34px 28px; }
-  .why-card--red { min-height: 340px; }
-  .why-card--photo { min-height: 0; padding-bottom: 0; }
-  .why-card--photo .why-card__title, .why-card--photo .why-card__text { max-width: none; }
-  .why-card--photo .why-card__num { color: #dcd8d5; text-shadow: none; }
-  .why-card--photo .why-card__img { position: relative; inset: auto; height: auto; aspect-ratio: 1400 / 1127; margin: 24px -28px 0; width: calc(100% + 56px); max-width: none; object-position: 70% 100%; }
+  .why-card, .stage { min-height: 0; padding: 32px 26px; }
+  .why-card__title, .stage__title { font-size: clamp(26px, 7.4vw, 32px); }
+  .why-card--red { min-height: 320px; }
+  .why-card__mark { left: -14px; right: auto; font-size: 130px; }
+  .why-card--photo { padding-bottom: 0; }
+  .why-card--photo .why-card__img {
+    position: relative;
+    inset: auto;
+    width: calc(100% + 52px);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1400 / 1127;
+    margin: 24px -26px 0;
+    object-position: 70% 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .why-card--white { display: flex; padding: 32px 26px; }
+  .why-card--white .why-card__text { margin-top: 18px; }
   .why__note { border-radius: var(--r-md); padding: 22px 20px; flex-direction: column; gap: 6px; }
   .why__sep { display: none; }
 
-  .plan__grid { padding-top: 0; }
-  .stage { min-height: 0; padding: 34px 28px; }
-  .stage--red { min-height: 0; padding-bottom: 0; }
-  .stage--red .stage__img--legs { position: relative; inset: auto; height: auto; aspect-ratio: 1400 / 1127; margin: 22px -28px 0; width: calc(100% + 56px); max-width: none; }
-  .stage--white { min-height: 340px; }
-  .stage--light { min-height: 620px; margin-top: 30px; }
-  .stage--light .stage__title, .stage--light .stage__text { max-width: none; }
-  .stage__img--coach { height: 64%; right: -4%; }
-
-  /* тренер: фото сверху на всю ширину, текст под ним */
-  .coach { display: block; min-height: 0; padding-top: 0; }
-  .coach__photo { position: relative; width: 100%; height: 100vw; max-height: 560px; }
-  .coach__photo img {
-    object-position: 45% 25%;
-    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
-    mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+  .stage--red { padding-bottom: 0; }
+  .stage--red .stage__img--legs {
+    position: relative;
+    inset: auto;
+    width: calc(100% + 52px);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1400 / 1127;
+    margin: 22px -26px 0;
   }
-  .coach__grid { grid-template-columns: 1fr; margin-top: -20px; }
-  .coach__content { grid-column: 1; }
+  .stage--white { min-height: 330px; }
+  .stage__loop { left: 4%; right: auto; width: 92%; bottom: 8%; }
+  .stage--light { min-height: 0; padding-bottom: 0; }
+  /* фигура по центру под текстом: справа с пустым углом слева выглядело недоделанным */
+  .stage__img--coach { position: relative; right: auto; bottom: auto; display: block; width: min(76%, 300px); height: auto; margin: 22px auto -1px; }
+
+  .coach__photo { height: 100vw; }
+  .coach__stats { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .coach__stats li { padding: 22px 22px; }
 
   .tariffs__note { display: none; }
-  .tariff { padding: 32px 24px; }
-  .tariff--club { padding: 32px 22px 28px; }
-  .tariff__coach { width: 170px; top: -60px; right: -14px; }
-  .tariff--club::before { width: 240px; height: 240px; top: -10px; right: -40px; }
-  .tariff__top { padding-right: 0; }
-  .tariff--club .pill { margin-right: 140px; }
-  .tariff--club .tariff__name { padding-right: 110px; }
-  .periods { grid-template-columns: 1fr; gap: 18px; }
+  .tariff--solo { display: flex; padding: 30px 22px; }
+  .tariff--solo .checks { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-top: 28px; }
+  .tariff--solo .tariff__price { margin: 28px 0 22px; align-self: flex-start; }
+  .tariff--solo .btn { margin-top: 0; align-self: stretch; }
+  .tariff--club { padding: 30px 20px 26px; }
+  .tariff__coach { width: 150px; top: -52px; right: -12px; }
+  .tariff--club::before { width: 220px; height: 220px; top: -10px; right: -50px; }
+  .tariff--club .pill { margin-right: 120px; }
+  .tariff--club .tariff__name { margin-right: 112px; font-size: 28px; }
+  .tariff__desc { margin-right: 0; }
+  .periods { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .period { flex-direction: row; justify-content: space-between; flex-wrap: wrap; padding: 22px 20px 18px; text-align: left; }
   .period__per { width: 100%; text-align: right; margin-top: -4px; }
   .period__badge { left: 20px; transform: none; top: -14px; }
-  .features { grid-template-columns: 1fr; gap: 20px; }
-  .perks { grid-template-columns: 1fr 1fr; gap: 14px 0; }
-  .perks li { padding: 4px 10px; }
-  .perks li:nth-child(odd) { border-left: 0; }
-  .btn--lg { white-space: normal; text-align: center; line-height: 1.2; padding: 16px 22px; }
+  .features { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .perks li { padding: 4px 8px; gap: 10px; font-size: 14px; }
+  .perks svg { width: 26px; height: 26px; }
+  .btn--lg { font-size: 16px; padding: 0 20px; gap: 10px; }
 }
 
-@media (max-width: 420px) {
-  .hero__title { font-size: 21vw; }
-  .btn--xl { width: 100%; padding: 0 24px; }
-  .hero__start { padding-left: 0; border-left: 0; flex-direction: row; align-items: baseline; gap: 10px; }
-  .why-card__mark { font-size: 130px; }
-  .stage__title, .why-card__title { font-size: 28px; }
-  .tariff--club .tariff__name { padding-right: 90px; }
-  .tariff__coach { width: 140px; }
+@media (max-width: 380px) {
+  .hero__title { font-size: 20vw; }
+  .why-card__mark { font-size: 110px; }
+  .tariff--club .tariff__name { margin-right: 80px; }
+  .tariff__coach { width: 130px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>СТЕП С НУЛЯ — степ-аэробика с Константином Баевым | Шагай Дома</title>
+<meta name="description" content="Попробуй степ-аэробику вместе с Константином Баевым: 7 тренировок по 15 минут, простые движения на шагах и зажигательная музыка. Старт 2 ноября." />
+<meta property="og:title" content="СТЕП С НУЛЯ — премьера в «Шагай Дома»" />
+<meta property="og:description" content="7 тренировок по 15 минут с Константином Баевым. Старт 2 ноября." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=step-2" />
+</head>
+<body>
+
+<!-- ============================================================
+     1. ПЕРВЫЙ ЭКРАН
+     Фото на всю ширину: Константин слева, справа светлая стена —
+     на неё ложится текст. На телефоне фото уходит наверх, текст под ним.
+     ============================================================ -->
+<section class="hero" id="top">
+  <picture class="hero__media">
+    <source media="(max-width: 899px)" srcset="assets/hero/hero-mobile.webp" />
+    <img class="hero__bg" src="assets/hero/hero.webp" srcset="assets/hero/hero-1400.webp 1400w, assets/hero/hero.webp 2400w" sizes="100vw" alt="Константин Баев на степ-платформе" width="2400" height="1600" fetchpriority="high" />
+  </picture>
+  <svg class="hero__lines" viewBox="0 0 1536 1024" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M560 300 C 780 210, 1000 110, 1260 0" />
+    <path d="M1010 1024 C 1180 900, 1340 820, 1536 760" />
+  </svg>
+
+  <a class="hero__logo" href="#top" aria-label="Шагай Дома"><svg viewBox="0 0 106.01 49.13" fill="none" role="img" aria-label="Шагай Дома"><path d="M27.36 36.85L22.19 37.4V20.22L14.26 20.6V38.26L8.68 38.86V20.87L0 21.28V45.81L34.6 41.41V19.62L27.36 19.97V36.85Z" fill="#E1121B"/><path d="M45.94 19.08L37.8 41.01L44.66 40.14L45.69 36.55L52.88 35.73L53.87 38.97L60.11 38.17L52.84 18.75L45.94 19.08ZM47.1 31.89L49.36 24.26L51.6 31.46L47.1 31.89Z" fill="#E1121B"/><path d="M76.12 17.63L62.29 18.29V37.9L67.87 37.19V22.73L76.12 22.18V17.63Z" fill="#E1121B"/><path d="M87 34.76L91.75 34.15L86.22 17.15L81.01 17.4L74.91 36.29L80.05 35.64L80.83 32.55L86.25 31.93L87 34.76ZM81.88 28.52L83.58 21.92L85.28 28.19L81.88 28.52Z" fill="#E1121B"/><path d="M102.2 23.79V32.82L105.92 32.35V16.2L102.22 16.38L97.21 25.93V16.62L93.16 16.81V33.97L97.21 33.46L102.2 23.79Z" fill="#E1121B"/><path d="M99.07 18.22L103.82 6.75L100.67 6.76L101.32 0L96.48 11.33L99.58 11.26L99.07 18.22Z" fill="#E1121B"/></svg></a>
+
+  <div class="wrap hero__grid">
+    <div class="hero__content">
+      <span class="hero__badge">Премьера в «Шагай Дома»</span>
+      <h1 class="hero__title">
+        <span class="hero__title-red">СТЕП</span>
+        <span class="hero__title-black">С НУЛЯ</span>
+        <span class="burst burst--yellow" aria-hidden="true"><i></i><i></i><i></i></span>
+      </h1>
+      <p class="hero__lead">Попробуй степ-аэробику вместе с&nbsp;Константином Баевым</p>
+      <p class="hero__text">Простые движения на&nbsp;шагах, зажигательная музыка и&nbsp;тренировки, которые не&nbsp;захочется бросить.</p>
+      <div class="hero__actions">
+        <a class="btn btn--yellow btn--xl" href="#tariffs" data-goal="hero-cta">Попробовать степ <svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+        <div class="hero__start"><span>Старт</span><b>2&nbsp;ноября</b></div>
+      </div>
+      <ul class="hero__features">
+        <li><span class="ring"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V110.25l112-28v51.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216ZM88,93.75V62.25l112-28v31.5ZM180,184a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"/></svg></span><span>Под ритмичную<br />музыку</span></li>
+        <li><span class="ring"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></svg></span><span>Занимайтесь<br />дома в&nbsp;кайф</span></li>
+        <li><span class="ring"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></svg></span><span>7 тренировок<br />по&nbsp;15&nbsp;минут</span></li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     2. КАРДИО МОЖЕТ БЫТЬ ЗАЖИГАТЕЛЬНЫМ
+     ============================================================ -->
+<section class="section why" id="why">
+  <div class="wrap">
+    <h2 class="title">
+      <span class="title__line">Кардио может быть</span>
+      <span class="title__line title__line--red">не&nbsp;скучным, а&nbsp;зажигательным!<span class="burst burst--red" aria-hidden="true"><i></i><i></i><i></i></span></span>
+    </h2>
+
+    <div class="why__grid">
+      <article class="why-card why-card--red">
+        <span class="why-card__num">01</span>
+        <h3 class="why-card__title">Сжигаем калории</h3>
+        <p class="why-card__text">Активно двигаемся и&nbsp;получаем хорошую кардионагрузку.</p>
+        <span class="why-card__mark" aria-hidden="true">СТЕП</span>
+      </article>
+
+      <article class="why-card why-card--photo">
+        <span class="why-card__num">02</span>
+        <h3 class="why-card__title">Развиваем координацию</h3>
+        <p class="why-card__text">Разучиваем новые движения и&nbsp;постепенно собираем их&nbsp;в&nbsp;связки.</p>
+        <img class="why-card__img" src="assets/cards/coord.webp" alt="Константин Баев показывает движение на степе" width="598" height="1100" loading="lazy" />
+      </article>
+
+      <article class="why-card why-card--white">
+        <span class="why-card__num">03</span>
+        <h3 class="why-card__title">Получаем удовольствие от&nbsp;процесса и&nbsp;своих успехов</h3>
+        <p class="why-card__text">Двигаемся под музыку и&nbsp;радуемся, когда вчерашнее «не&nbsp;получается» сегодня уже получается.</p>
+      </article>
+    </div>
+
+    <p class="why__note"><b>Никогда не&nbsp;занимались степом?</b><span class="why__sep" aria-hidden="true"></span><span>Начнём с&nbsp;самых простых движений.</span></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. ОСВОЙ СТЕП ЗА 7 ТРЕНИРОВОК
+     ============================================================ -->
+<section class="section plan" id="plan">
+  <div class="wrap">
+    <h2 class="title title--xl">
+      <span class="title__line">Освой степ</span>
+      <span class="title__line title__line--red">за&nbsp;7&nbsp;тренировок.</span>
+    </h2>
+    <p class="lead">Каждая тренировка&nbsp;— 15&nbsp;минут. Двигаемся постепенно: от&nbsp;самых простых шагов к&nbsp;полноценным связкам.</p>
+
+    <div class="plan__grid">
+      <article class="stage stage--red">
+        <span class="stage__label">Тренировки 1–2</span>
+        <h3 class="stage__title">Знакомимся со&nbsp;степом</h3>
+        <p class="stage__text">Осваиваем базовые шаги в&nbsp;ритм музыки.</p>
+        <img class="stage__img stage__img--legs" src="assets/cards/legs.webp" alt="Шаг на степ-платформу" width="1100" height="668" loading="lazy" />
+      </article>
+
+      <article class="stage stage--white">
+        <span class="stage__label">Тренировки 3–5</span>
+        <h3 class="stage__title">Собираем связки</h3>
+        <p class="stage__text">Добавляем новые движения и&nbsp;соединяем между собой.</p>
+        <svg class="stage__loop" viewBox="0 0 360 200" aria-hidden="true">
+          <path d="M8 182 C 60 186, 120 176, 150 150 C 186 118, 168 70, 132 76 C 92 84, 104 146, 168 150 C 236 154, 300 110, 344 44" />
+          <path d="M318 46 L 346 40 L 340 70" />
+        </svg>
+      </article>
+
+      <article class="stage stage--light">
+        <span class="stage__label">Тренировки 6–7</span>
+        <h3 class="stage__title">Шагаем увереннее</h3>
+        <p class="stage__text">Постепенно усложняем и&nbsp;кайфуем от&nbsp;процесса.</p>
+        <img class="stage__img stage__img--coach" src="assets/cards/confident.webp" alt="Константин Баев на степ-платформе" width="1016" height="1100" loading="lazy" />
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. ТРЕНЕР
+     ============================================================ -->
+<section class="section coach" id="coach">
+  <div class="coach__photo">
+    <img src="assets/coach/coach.webp" alt="Константин Баев выполняет мах ногой на степе" width="1500" height="1667" loading="lazy" />
+  </div>
+  <div class="wrap coach__grid">
+    <div class="coach__content">
+      <h2 class="title">
+        <span class="title__line">Константин Баев&nbsp;—</span>
+        <span class="title__line title__line--red">тренер с&nbsp;25+ летним опытом работы</span>
+      </h2>
+      <p class="lead">Костя умеет объяснять движения просто, заряжает своей энергией и&nbsp;превращает тренировку в&nbsp;те&nbsp;самые 15&nbsp;минут, которые хочется повторить завтра.</p>
+      <ul class="coach__stats">
+        <li><b>25+ лет</b><span>опыта работы тренером по&nbsp;фитнесу</span></li>
+        <li><b class="coach__stat-word">Победитель</b><span>российских и&nbsp;европейских соревнований по&nbsp;фитнес-аэробике</span></li>
+        <li><b>50 лет</b><span>и&nbsp;энергии хоть отбавляй</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. ТАРИФЫ
+     Ссылки оплаты — заглушки вида walk-walk.ru/step/tarif_*, их
+     нужно заменить на реальные.
+     ============================================================ -->
+<section class="section tariffs" id="tariffs">
+  <div class="wrap">
+    <div class="tariffs__head">
+      <h2 class="title">Выберите <span class="red">свой формат</span></h2>
+      <p class="lead">Начните со&nbsp;СТЕП или получите доступ ко&nbsp;всему клубу «Шагай Дома»</p>
+      <p class="tariffs__note" aria-hidden="true">Больше<br />движения<br />в&nbsp;вашей жизни
+        <svg viewBox="0 0 60 60"><path d="M6 6 C 10 30, 26 44, 48 46" /><path d="M38 38 L 49 46 L 38 54" /></svg>
+      </p>
+    </div>
+
+    <div class="tariffs__grid">
+      <article class="tariff tariff--solo">
+        <span class="pill">Только интенсив</span>
+        <h3 class="tariff__name">СТЕП <span class="red">с&nbsp;нуля</span></h3>
+        <p class="tariff__term">1 месяц</p>
+        <ul class="checks">
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg><span>7 тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg><span>Постепенно: от&nbsp;базовых шагов к&nbsp;связкам</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg><span>Доступ на&nbsp;1&nbsp;месяц</span></li>
+        </ul>
+        <div class="tariff__price">1&nbsp;600&nbsp;₽</div>
+        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="solo">Попробовать СТЕП <svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+        <p class="tariff__hint"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg><span>Подходит, если хотите сначала попробовать и&nbsp;познакомиться со&nbsp;степом.</span></p>
+      </article>
+
+      <article class="tariff tariff--club">
+        <img class="tariff__coach" src="assets/tariff/coach-step.webp" alt="" width="852" height="1100" loading="lazy" />
+        <div class="tariff__top">
+          <span class="pill">Лучший выбор</span>
+          <h3 class="tariff__name">СТЕП с&nbsp;нуля + <span class="red">полный доступ в&nbsp;клуб</span></h3>
+          <p class="tariff__desc">Продолжайте заниматься после интенсива и&nbsp;получите доступ ко&nbsp;всем тренировкам, программам и&nbsp;функциям клуба.</p>
+
+          <div class="periods" role="radiogroup" aria-label="Срок доступа">
+            <button class="period" type="button" role="radio" aria-checked="false" data-href="https://walk-walk.ru/step/tarif_3m" data-goal="club-3m">
+              <span class="period__term">3 месяца</span>
+              <span class="period__price">3&nbsp;700&nbsp;₽</span>
+              <span class="period__per">≈&nbsp;1&nbsp;233&nbsp;₽/мес</span>
+            </button>
+            <button class="period" type="button" role="radio" aria-checked="false" data-href="https://walk-walk.ru/step/tarif_6m" data-goal="club-6m">
+              <span class="period__term">6 месяцев</span>
+              <span class="period__price">4&nbsp;700&nbsp;₽</span>
+              <span class="period__per">≈&nbsp;783&nbsp;₽/мес</span>
+            </button>
+            <button class="period is-active" type="button" role="radio" aria-checked="true" data-href="https://walk-walk.ru/step/tarif_12m" data-goal="club-12m">
+              <span class="period__badge">Выгоднее всего</span>
+              <span class="period__term">12 месяцев</span>
+              <span class="period__price">6&nbsp;400&nbsp;₽</span>
+              <span class="period__per">≈&nbsp;533&nbsp;₽/мес</span>
+            </button>
+          </div>
+        </div>
+
+        <h4 class="tariff__includes">В тариф клуб «Шагай Дома» входит:</h4>
+        <ul class="features">
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></svg></span><div><b>СТЕП с&nbsp;нуля</b><span>7 тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</span></div></li>
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z"/></svg></span><div><b>25 программ</b><span>Готовые программы для разных целей и&nbsp;уровней</span></div></li>
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M230.91,172A8,8,0,0,1,228,182.91l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,36,169.09l92,53.65,92-53.65A8,8,0,0,1,230.91,172ZM220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.06,0l96-56A8,8,0,1,0,220,121.09ZM24,80a8,8,0,0,1,4-6.91l96-56a8,8,0,0,1,8.06,0l96,56a8,8,0,0,1,0,13.82l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,24,80Zm23.88,0L128,126.74,208.12,80,128,33.26Z"/></svg></span><div><b>400+ тренировок</b><span>Кардио, сила, растяжка, осанка и&nbsp;многое другое</span></div></li>
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-38.34-85.66a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35A8,8,0,0,1,169.66,122.34Z"/></svg></span><div><b>План тренировок</b><span>Готовые планы на&nbsp;неделю, чтобы было проще заниматься</span></div></li>
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V110.25l112-28v51.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216ZM88,93.75V62.25l112-28v31.5ZM180,184a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"/></svg></span><div><b>Шагай.FM</b><span>Тренировки под ритмичную музыку для ещё большего заряда</span></div></li>
+          <li><span class="ring ring--sm"><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M248,128a56,56,0,0,1-95.6,39.6l-.33-.35L92.12,99.55a40,40,0,1,0,0,56.9l8.52-9.62a8,8,0,1,1,12,10.61l-8.69,9.81-.33.35a56,56,0,1,1,0-79.2l.33.35,59.95,67.7a40,40,0,1,0,0-56.9l-8.52,9.62a8,8,0,1,1-12-10.61l8.69-9.81.33-.35A56,56,0,0,1,248,128Z"/></svg></span><div><b>Доступ на&nbsp;выбранный срок</b><span>Можно заниматься в&nbsp;любое время и&nbsp;повторять тренировки сколько нужно</span></div></li>
+        </ul>
+
+        <a class="btn btn--red btn--block btn--lg" id="clubCta" href="https://walk-walk.ru/step/tarif_12m" data-goal="club-cta">Выбрать тариф и&nbsp;получить доступ <svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+
+        <ul class="perks">
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,16V88H32V64Zm0,128H32V104H224v88Zm-16-24a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h32A8,8,0,0,1,208,168Zm-64,0a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h16A8,8,0,0,1,144,168Z"/></svg><span>Без привязки карты</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></svg><span>Доступ сразу после оплаты</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M248,128a56,56,0,0,1-95.6,39.6l-.33-.35L92.12,99.55a40,40,0,1,0,0,56.9l8.52-9.62a8,8,0,1,1,12,10.61l-8.69,9.81-.33.35a56,56,0,1,1,0-79.2l.33.35,59.95,67.7a40,40,0,1,0,0-56.9l-8.52,9.62a8,8,0,1,1-12-10.61l8.69-9.81.33-.35A56,56,0,0,1,248,128Z"/></svg><span>Все тренировки в&nbsp;записи</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 256 256" fill="currentColor"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg><span>Занимайтесь на&nbsp;любом устройстве</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script src="script.js?v=step-2"></script>
+</body>
+</html>

@@ -40,42 +40,36 @@
   });
 
   /* ---------- Срок клубного тарифа ----------
-     Переключатель меняет цену, подпись и кнопку: на кнопке всегда написано,
-     что именно покупается и за сколько. */
-  var segs = document.querySelectorAll('.plan--best .seg__btn');
-  var price = document.getElementById('clubPrice');
-  var per = document.getElementById('clubPer');
+     Плитки срока работают как радиокнопки. Цена у каждой плитки своя,
+     а кнопка всегда говорит, что именно покупается и за сколько. */
+  var terms = document.querySelectorAll('.club .term');
   var cta = document.getElementById('clubCta');
   var ctaTerm = document.getElementById('clubCtaTerm');
   var ctaPrice = document.getElementById('clubCtaPrice');
-  var NB = ' ';
+  var NB = '\u00a0';
   function monthsWord(n) { return n === 3 ? 'месяца' : 'месяцев'; }
   function select(btn) {
-    for (var i = 0; i < segs.length; i++) {
-      var on = segs[i] === btn;
-      segs[i].classList.toggle('is-on', on);
-      segs[i].setAttribute('aria-checked', on ? 'true' : 'false');
-      segs[i].setAttribute('tabindex', on ? '0' : '-1');
+    for (var i = 0; i < terms.length; i++) {
+      var on = terms[i] === btn;
+      terms[i].classList.toggle('is-on', on);
+      terms[i].setAttribute('aria-checked', on ? 'true' : 'false');
+      terms[i].setAttribute('tabindex', on ? '0' : '-1');
     }
     var m = +btn.getAttribute('data-months');
-    var p = btn.getAttribute('data-price').replace(' ', NB);
-    var pm = btn.getAttribute('data-per').replace(' ', NB);
-    if (price) price.textContent = p + NB + '₽';
-    if (per) per.textContent = 'за' + NB + m + NB + monthsWord(m) + ' · ≈' + NB + pm + NB + '₽ в' + NB + 'месяц';
     if (ctaTerm) ctaTerm.textContent = m + NB + monthsWord(m);
-    if (ctaPrice) ctaPrice.textContent = p + NB + '₽';
+    if (ctaPrice) ctaPrice.textContent = btn.getAttribute('data-price').replace(' ', NB) + NB + '₽';
     if (cta) cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
   }
-  for (var s = 0; s < segs.length; s++) {
-    segs[s].addEventListener('click', function () { select(this); });
-    segs[s].addEventListener('keydown', function (e) {
-      var list = Array.prototype.slice.call(segs), idx = list.indexOf(this), to = -1;
+  for (var s = 0; s < terms.length; s++) {
+    terms[s].addEventListener('click', function () { select(this); });
+    terms[s].addEventListener('keydown', function (e) {
+      var list = Array.prototype.slice.call(terms), idx = list.indexOf(this), to = -1;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (idx + 1) % list.length;
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (idx - 1 + list.length) % list.length;
       if (to > -1) { e.preventDefault(); select(list[to]); list[to].focus(); }
     });
   }
-  var on = document.querySelector('.plan--best .seg__btn.is-on');
+  var on = document.querySelector('.club .term.is-on');
   if (on) select(on);
 
   /* ---------- Плавный переход по якорям (на Тильде scroll-behavior не доходит) ---------- */

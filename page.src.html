@@ -10,8 +10,8 @@
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=v2-3" />
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@800;900&family=Sofia+Sans+Condensed:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=v3-1" />
 </head>
 <body>
 
@@ -19,7 +19,7 @@
      1. ПЕРВЫЙ ЭКРАН
      ============================================================ -->
 <section class="hero" id="top">
-  <div class="wrap">
+  <div class="wrap wrap--wide">
     <nav class="nav" aria-label="Навигация по странице">
       <a class="nav__logo" href="#top" aria-label="Шагай Дома">@@logo@@</a>
       <div class="nav__links">
@@ -27,29 +27,29 @@
         <a href="#coach">Тренер</a>
         <a href="#tariffs">Тарифы</a>
       </div>
-      <a class="btn btn--red btn--sm" href="#tariffs" data-goal="nav-cta">Попробовать</a>
+      <a class="btn btn--red nav__cta" href="#tariffs" data-goal="nav-cta">Попробовать</a>
     </nav>
+  </div>
 
-    <div class="hero__grid">
-      <div class="hero__content">
-        <span class="pill">Премьера в «Шагай Дома»</span>
-        <h1 class="hero__title">Степ <span>с нуля</span></h1>
-        <p class="hero__lead">Попробуй степ-аэробику вместе с&nbsp;Константином Баевым</p>
-        <p class="hero__text">Простые движения на&nbsp;шагах, зажигательная музыка и&nbsp;тренировки, которые не&nbsp;захочется бросить.</p>
-        <div class="hero__actions">
-          <a class="btn btn--red btn--lg" href="#tariffs" data-goal="hero-cta">Попробовать степ @@icon:arrow-right@@</a>
-          <span class="chip">@@icon:calendar-blank@@ Старт 2&nbsp;ноября</span>
-        </div>
-        <ul class="facts">
-          <li>@@icon:music-notes@@<span>Под ритмичную музыку</span></li>
-          <li>@@icon:house@@<span>Занимайтесь дома в&nbsp;кайф</span></li>
-          <li>@@icon:timer@@<span>7 тренировок по&nbsp;15&nbsp;минут</span></li>
-        </ul>
+  <div class="wrap hero__grid">
+    <div class="hero__content">
+      <span class="pill">Премьера в «Шагай Дома»</span>
+      <h1 class="hero__title"><span class="xc">Степ с&nbsp;нуля</span></h1>
+      <p class="hero__lead">Попробуй степ-аэробику вместе с&nbsp;Константином Баевым</p>
+      <p class="hero__text">Простые движения на&nbsp;шагах, зажигательная музыка и&nbsp;тренировки, которые не&nbsp;захочется бросить.</p>
+      <div class="hero__actions">
+        <a class="btn btn--red btn--lg" href="#tariffs" data-goal="hero-cta">Попробовать степ @@icon:arrow-right@@</a>
+        <span class="chip">@@icon:calendar-blank@@ Старт 2&nbsp;ноября</span>
       </div>
-      <div class="hero__visual" aria-hidden="true">
-        <svg class="bolt" viewBox="0 0 300 520"><polygon points="196,0 44,292 142,292 92,520 268,196 168,196 236,0" /></svg>
-        <img class="hero__img" src="assets/v2/hero.webp" alt="" width="1063" height="1300" fetchpriority="high" />
-      </div>
+      <ul class="facts">
+        <li class="card">@@icon:music-notes@@<span>Под ритмичную музыку</span></li>
+        <li class="card">@@icon:house@@<span>Занимайтесь дома в&nbsp;кайф</span></li>
+        <li class="card">@@icon:timer@@<span>7 тренировок по&nbsp;15&nbsp;минут</span></li>
+      </ul>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      @@burst@@
+      <img class="hero__img" src="assets/v3/hero.webp" alt="" width="901" height="1631" fetchpriority="high" />
     </div>
   </div>
 </section>
@@ -60,60 +60,59 @@
 <section class="section" id="why">
   <div class="wrap">
     <p class="eyebrow">Почему степ</p>
-    <h2 class="h2">Кардио может быть не&nbsp;скучным, а&nbsp;зажигательным!</h2>
+    <h2 class="h2">Кардио может быть не&nbsp;скучным, <br />а&nbsp;зажигательным!</h2>
     <div class="why">
       <article class="card why__item">
-        <span class="why__num">01</span>
-        <div><h3 class="h3">Сжигаем калории</h3><p>Активно двигаемся и&nbsp;получаем хорошую кардионагрузку.</p></div>
+        <span class="why__num"><span>01</span></span>
+        <div><h3 class="why__title">Сжигаем калории&nbsp;—</h3><p>Активно двигаемся и&nbsp;получаем хорошую кардионагрузку</p></div>
       </article>
       <article class="card why__item">
-        <span class="why__num">02</span>
-        <div><h3 class="h3">Развиваем координацию</h3><p>Разучиваем новые движения и&nbsp;постепенно собираем их&nbsp;в&nbsp;связки.</p></div>
+        <span class="why__num"><span>02</span></span>
+        <div><h3 class="why__title">Развиваем координацию&nbsp;—</h3><p>Разучиваем новые движения и&nbsp;собираем их&nbsp;в&nbsp;связки</p></div>
       </article>
       <article class="card why__item">
-        <span class="why__num">03</span>
-        <div><h3 class="h3">Получаем удовольствие</h3><p>Двигаемся под музыку и&nbsp;радуемся, когда вчерашнее «не&nbsp;получается» сегодня уже получается.</p></div>
+        <span class="why__num"><span>03</span></span>
+        <div><h3 class="why__title">Получаем удовольствие&nbsp;—</h3><p>Радуемся, когда вчерашнее «не&nbsp;получается» сегодня уже получается</p></div>
       </article>
     </div>
-    <p class="note"><b>Никогда не&nbsp;занимались степом?</b> Начнём с&nbsp;самых простых движений.</p>
   </div>
 </section>
 
 <!-- ============================================================
      3. ПРОГРАММА
      ============================================================ -->
-<section class="section section--tint" id="plan">
+<section class="section section--light" id="plan">
   <div class="wrap">
     <p class="eyebrow">Программа</p>
-    <h2 class="h2">Освой степ за&nbsp;7&nbsp;тренировок</h2>
-    <p class="lead">Каждая тренировка&nbsp;— 15&nbsp;минут. Двигаемся постепенно: от&nbsp;самых простых шагов к&nbsp;полноценным связкам.</p>
+    <h2 class="h2 h2--xl">Освой степ за&nbsp;7&nbsp;тренировок</h2>
+    <p class="lead">Каждая тренировка&nbsp;— 15&nbsp;минут</p>
     <ol class="stages">
       <li class="card stage">
         <span class="stage__dot">1</span>
         <div class="stage__text">
           <span class="stage__label">Тренировки 1–2</span>
-          <h3 class="h3">Знакомимся со&nbsp;степом</h3>
-          <p>Осваиваем базовые шаги в&nbsp;ритм музыки.</p>
+          <h3 class="stage__title">Знакомимся со&nbsp;степом</h3>
         </div>
-        <div class="stage__photo"><img src="assets/v2/stage-1.webp" alt="Константин Баев на степ-платформе" width="603" height="900" loading="lazy" /></div>
+        <div class="stage__panel"></div>
+        <img class="stage__img stage__img--1" src="assets/v3/stage-1.webp" alt="Константин Баев объясняет движение" width="640" height="1053" loading="lazy" />
       </li>
       <li class="card stage">
         <span class="stage__dot">2</span>
         <div class="stage__text">
           <span class="stage__label">Тренировки 3–5</span>
-          <h3 class="h3">Собираем связки</h3>
-          <p>Добавляем новые движения и&nbsp;соединяем их между собой.</p>
+          <h3 class="stage__title">Собираем связки</h3>
         </div>
-        <div class="stage__photo"><img src="assets/v2/stage-2.webp" alt="Константин Баев показывает связку" width="604" height="900" loading="lazy" /></div>
+        <div class="stage__panel"></div>
+        <img class="stage__img stage__img--2" src="assets/v3/stage-2.webp" alt="Константин Баев на степ-платформе" width="611" height="1258" loading="lazy" />
       </li>
       <li class="card stage">
         <span class="stage__dot">3</span>
         <div class="stage__text">
           <span class="stage__label">Тренировки 6–7</span>
-          <h3 class="h3">Шагаем увереннее</h3>
-          <p>Постепенно усложняем и&nbsp;кайфуем от&nbsp;процесса.</p>
+          <h3 class="stage__title">Шагаем увереннее</h3>
         </div>
-        <div class="stage__photo"><img src="assets/v2/stage-3.webp" alt="Константин Баев выполняет шаг с подъёмом колена" width="598" height="900" loading="lazy" /></div>
+        <div class="stage__panel"></div>
+        <img class="stage__img stage__img--3" src="assets/v3/stage-3.webp" alt="Константин Баев выполняет мах ногой" width="992" height="1064" loading="lazy" />
       </li>
     </ol>
   </div>
@@ -122,99 +121,86 @@
 <!-- ============================================================
      4. ТРЕНЕР
      ============================================================ -->
-<section class="section" id="coach">
+<section class="section section--coach" id="coach">
   <div class="wrap coach">
     <div class="coach__content">
       <p class="eyebrow">Тренер</p>
-      <h2 class="h2 h2--red">Константин Баев&nbsp;— тренер с&nbsp;25+ летним опытом</h2>
-      <p class="lead">Костя умеет объяснять движения просто, заряжает своей энергией и&nbsp;превращает тренировку в&nbsp;те&nbsp;самые 15&nbsp;минут, которые хочется повторить завтра.</p>
+      <h2 class="coach__title"><span class="xc">Константин Баев&nbsp;— <br />тренер с&nbsp;25+ летним опытом</span></h2>
+      <p class="lead">Костя умеет объяснять движения просто, заряжает энергией и&nbsp;превращает тренировку в&nbsp;те&nbsp;самые 15&nbsp;минут, которые хочется повторить завтра.</p>
       <ul class="stats">
-        <li class="card"><b>25+ лет</b><span>опыта работы тренером по&nbsp;фитнесу</span></li>
-        <li class="card"><b>Победитель</b><span>российских и&nbsp;европейских соревнований по&nbsp;фитнес-аэробике</span></li>
-        <li class="card"><b>50 лет</b><span>и&nbsp;энергии хоть отбавляй</span></li>
+        <li class="card"><b>25+ лет&nbsp;—</b><span>опыта работы тренером по&nbsp;фитнесу</span></li>
+        <li class="card"><b>Победитель&nbsp;—</b><span>российских и&nbsp;европейских соревнований по&nbsp;фитнес-аэробике</span></li>
+        <li class="card"><b>50 лет&nbsp;—</b><span>и&nbsp;энергии хоть отбавляй</span></li>
       </ul>
     </div>
     <div class="coach__visual" aria-hidden="true">
-      <svg class="bolt" viewBox="0 0 300 520"><polygon points="196,0 44,292 142,292 92,520 268,196 168,196 236,0" /></svg>
-      <img class="coach__img" src="assets/v2/coach.webp" alt="" width="784" height="1300" loading="lazy" />
+      @@burst@@
+      <img class="coach__img" src="assets/v3/coach.webp" alt="" width="784" height="1300" loading="lazy" />
     </div>
   </div>
 </section>
 
 <!-- ============================================================
      5. ТАРИФЫ
-     Две карточки с одинаковым устройством: срок, цена, что входит,
-     кнопка — чтобы варианты было легко сравнить.
+     Слева заголовок и интенсив, справа клуб. Срок клуба выбирается
+     плитками с ценой; кнопка всегда говорит, что покупаем и за сколько.
      Ссылки оплаты — заглушки walk-walk.ru/step/tarif_*.
      ============================================================ -->
-<section class="section section--tint" id="tariffs">
-  <div class="wrap">
-    <p class="eyebrow">Тарифы</p>
-    <h2 class="h2">Выберите свой формат</h2>
-    <p class="lead">Два варианта: только интенсив или интенсив вместе с&nbsp;клубом «Шагай Дома».</p>
+<section class="section" id="tariffs">
+  <div class="wrap tariffs">
+    <div class="tariffs__side">
+      <p class="eyebrow">Тарифы</p>
+      <h2 class="h2 h2--caps"><span class="xc">Выберите свой формат</span></h2>
+      <p class="lead">Начните со&nbsp;СТЕП или получите доступ ко&nbsp;всему клубу «Шагай Дома»</p>
 
-    <div class="plans">
       <article class="card plan">
-        <div class="plan__head">
-          <span class="plan__tag">Только интенсив</span>
-          <h3 class="plan__name">СТЕП с&nbsp;нуля</h3>
-        </div>
-        <div class="seg seg--single">@@icon:calendar-check@@<span>Срок доступа: 1&nbsp;месяц</span></div>
-        <div class="plan__price"><b>1&nbsp;600&nbsp;₽</b><span>за&nbsp;весь интенсив</span></div>
-        <p class="plan__inc">Что входит</p>
+        <h3 class="plan__name">Только интенсив&nbsp;· <br /><em>Степ с&nbsp;нуля</em>&nbsp;· 1&nbsp;месяц</h3>
         <ul class="inc">
-          <li class="yes">@@icon:check-circle-fill@@<span>7 тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>От&nbsp;базовых шагов к&nbsp;связкам</span></li>
-          <li class="no">@@icon:minus-circle@@<span>400+ тренировок клуба</span></li>
-          <li class="no">@@icon:minus-circle@@<span>25 программ под разные цели</span></li>
-          <li class="no">@@icon:minus-circle@@<span>Готовый план тренировок на&nbsp;неделю</span></li>
-          <li class="no">@@icon:minus-circle@@<span>Шагай.FM&nbsp;— тренировки под музыку</span></li>
+          <li>@@icon:check-circle-fill@@<span>7 тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</span></li>
+          <li>@@icon:check-circle-fill@@<span>Постепенно: от&nbsp;базовых шагов к&nbsp;связкам</span></li>
+          <li>@@icon:check-circle-fill@@<span>Доступ на&nbsp;1&nbsp;месяц</span></li>
         </ul>
-        <a class="btn btn--outline btn--block" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="buy-intensiv"><span>Купить интенсив</span> <span>за&nbsp;1&nbsp;600&nbsp;₽</span></a>
-      </article>
-
-      <article class="card plan plan--best">
-        <div class="plan__head">
-          <span class="plan__tag plan__tag--best">Лучший выбор</span>
-          <h3 class="plan__name">СТЕП с&nbsp;нуля + клуб «Шагай Дома»</h3>
-        </div>
-        <div class="seg" role="radiogroup" aria-label="Срок доступа">
-          <button class="seg__btn" type="button" role="radio" aria-checked="false" data-months="3" data-price="3 700" data-per="1 233" data-href="https://walk-walk.ru/step/tarif_3m"><b>3</b> месяца</button>
-          <button class="seg__btn" type="button" role="radio" aria-checked="false" data-months="6" data-price="4 700" data-per="783" data-href="https://walk-walk.ru/step/tarif_6m"><b>6</b> месяцев</button>
-          <button class="seg__btn is-on" type="button" role="radio" aria-checked="true" data-months="12" data-price="6 400" data-per="533" data-href="https://walk-walk.ru/step/tarif_12m"><b>12</b> месяцев<i>Выгоднее всего</i></button>
-        </div>
-        <div class="plan__price"><b id="clubPrice">6&nbsp;400&nbsp;₽</b><span id="clubPer">за&nbsp;12&nbsp;месяцев · ≈&nbsp;533&nbsp;₽ в&nbsp;месяц</span></div>
-        <p class="plan__inc">Что входит</p>
-        <ul class="inc">
-          <li class="yes">@@icon:check-circle-fill@@<span>7 тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>От&nbsp;базовых шагов к&nbsp;связкам</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>400+ тренировок клуба: кардио, сила, растяжка, осанка</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>25 программ под разные цели</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>Готовый план тренировок на&nbsp;неделю</span></li>
-          <li class="yes">@@icon:check-circle-fill@@<span>Шагай.FM&nbsp;— тренировки под музыку</span></li>
-        </ul>
-        <a class="btn btn--red btn--block" id="clubCta" href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club"><span>Купить на&nbsp;<span id="clubCtaTerm">12&nbsp;месяцев</span></span> <span>за&nbsp;<span id="clubCtaPrice">6&nbsp;400&nbsp;₽</span></span></a>
+        <div class="plan__price">1&nbsp;600&nbsp;₽</div>
+        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="buy-intensiv">Купить интенсив @@icon:arrow-right@@</a>
       </article>
     </div>
 
-    <div class="card howto">
-      <h3 class="howto__title">Как проходит покупка</h3>
-      <ol class="howto__steps">
-        <li><span>1</span><p><b>Выберите тариф и&nbsp;срок</b>Интенсив на&nbsp;месяц или интенсив вместе с&nbsp;клубом.</p></li>
-        <li><span>2</span><p><b>Оплатите</b>Без привязки карты.</p></li>
-        <li><span>3</span><p><b>Доступ откроется сразу</b>Тренировки стартуют 2&nbsp;ноября, все в&nbsp;записи и&nbsp;на&nbsp;любом устройстве.</p></li>
-      </ol>
-    </div>
+    <article class="card club">
+      <span class="club__tag">Лучший выбор</span>
+      <h3 class="club__name"><span class="xc"><em>Степ с&nbsp;нуля</em> + полный доступ в&nbsp;клуб</span></h3>
+      <p class="club__hint">Выберите срок доступа:</p>
+      <div class="terms" role="radiogroup" aria-label="Срок доступа">
+        <button class="term" type="button" role="radio" aria-checked="false" data-months="3" data-price="3 700" data-href="https://walk-walk.ru/step/tarif_3m"><span class="term__m">3 месяца</span><b class="term__p">3&nbsp;700&nbsp;₽</b><span class="term__per">≈&nbsp;1&nbsp;233&nbsp;₽/мес</span><span class="term__check">@@icon:check-circle-fill@@</span></button>
+        <button class="term" type="button" role="radio" aria-checked="false" data-months="6" data-price="4 700" data-href="https://walk-walk.ru/step/tarif_6m"><span class="term__m">6 месяцев</span><b class="term__p">4&nbsp;700&nbsp;₽</b><span class="term__per">≈&nbsp;783&nbsp;₽/мес</span><span class="term__check">@@icon:check-circle-fill@@</span></button>
+        <button class="term is-on" type="button" role="radio" aria-checked="true" data-months="12" data-price="6 400" data-href="https://walk-walk.ru/step/tarif_12m"><i class="term__badge">Выгоднее всего</i><span class="term__m">12 месяцев</span><b class="term__p">6&nbsp;400&nbsp;₽</b><span class="term__per">≈&nbsp;533&nbsp;₽/мес</span><span class="term__check">@@icon:check-circle-fill@@</span></button>
+      </div>
+      <p class="club__inc">В тариф входит</p>
+      <ul class="inc inc--2col">
+        <li>@@icon:check-circle-fill@@<span>Интенсив «Степ с&nbsp;нуля»: 7&nbsp;тренировок с&nbsp;Костей</span></li>
+        <li>@@icon:check-circle-fill@@<span>400+ тренировок клуба</span></li>
+        <li>@@icon:check-circle-fill@@<span>25 программ под разные цели</span></li>
+        <li>@@icon:check-circle-fill@@<span>План тренировок на&nbsp;неделю</span></li>
+        <li>@@icon:check-circle-fill@@<span>Шагай.FM&nbsp;— тренировки под музыку</span></li>
+      </ul>
+      <a class="btn btn--red btn--block btn--lg" id="clubCta" href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club"><span>Купить на&nbsp;<span id="clubCtaTerm">12&nbsp;месяцев</span></span> <span>за&nbsp;<span id="clubCtaPrice">6&nbsp;400&nbsp;₽</span></span> @@icon:arrow-right@@</a>
+      <ul class="trust">
+        <li>@@icon:credit-card@@<span>Без привязки карты</span></li>
+        <li>@@icon:lightning@@<span>Доступ сразу после оплаты</span></li>
+        <li>@@icon:device-mobile@@<span>Занимайтесь на&nbsp;любом устройстве</span></li>
+      </ul>
+    </article>
   </div>
 </section>
 
 <footer class="foot">
-  <div class="wrap foot__in">
-    <a class="foot__logo" href="#top" aria-label="Шагай Дома">@@logo@@</a>
-    <span>Онлайн-клуб домашних тренировок «Шагай Дома»</span>
+  <div class="wrap wrap--wide">
+    <div class="foot__card">
+      <a class="foot__logo" href="#top" aria-label="Шагай Дома">@@logo@@</a>
+      <span>Онлайн-клуб домашних тренировок «Шагай Дома»</span>
+    </div>
   </div>
 </footer>
 
-<script src="script.js?v=v2-3"></script>
+<script src="script.js?v=v3-1"></script>
 </body>
 </html>

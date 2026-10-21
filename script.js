@@ -40,14 +40,10 @@
   });
 
   /* ---------- Срок клубного тарифа ----------
-     Плитки срока работают как радиокнопки. Цена у каждой плитки своя,
-     а кнопка всегда говорит, что именно покупается и за сколько. */
-  var terms = document.querySelectorAll('.club .term');
+     Колонки «3 / 6 / 12 месяцев» работают как радиокнопки: выбранная
+     подсвечивается, жёлтая кнопка ведёт на оплату выбранного срока. */
+  var terms = document.querySelectorAll('.tcard--club .term');
   var cta = document.getElementById('clubCta');
-  var ctaTerm = document.getElementById('clubCtaTerm');
-  var ctaPrice = document.getElementById('clubCtaPrice');
-  var NB = '\u00a0';
-  function monthsWord(n) { return n === 3 ? 'месяца' : 'месяцев'; }
   function select(btn) {
     for (var i = 0; i < terms.length; i++) {
       var on = terms[i] === btn;
@@ -55,9 +51,6 @@
       terms[i].setAttribute('aria-checked', on ? 'true' : 'false');
       terms[i].setAttribute('tabindex', on ? '0' : '-1');
     }
-    var m = +btn.getAttribute('data-months');
-    if (ctaTerm) ctaTerm.textContent = m + NB + monthsWord(m);
-    if (ctaPrice) ctaPrice.textContent = btn.getAttribute('data-price').replace(' ', NB) + NB + '₽';
     if (cta) cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
   }
   for (var s = 0; s < terms.length; s++) {
@@ -69,7 +62,7 @@
       if (to > -1) { e.preventDefault(); select(list[to]); list[to].focus(); }
     });
   }
-  var on = document.querySelector('.club .term.is-on');
+  var on = document.querySelector('.tcard--club .term.is-on');
   if (on) select(on);
 
   /* ---------- Плавный переход по якорям (на Тильде scroll-behavior не доходит) ---------- */

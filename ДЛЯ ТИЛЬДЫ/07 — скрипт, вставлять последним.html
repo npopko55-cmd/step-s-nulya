@@ -36,12 +36,8 @@
     try { if (typeof window.ym === 'function') window.ym(METRIKA_ID, 'reachGoal', 'step-' + el.getAttribute('data-goal')); } catch (err) {}
   });
 
-  var terms = document.querySelectorAll('.club .term');
+  var terms = document.querySelectorAll('.tcard--club .term');
   var cta = document.getElementById('clubCta');
-  var ctaTerm = document.getElementById('clubCtaTerm');
-  var ctaPrice = document.getElementById('clubCtaPrice');
-  var NB = '\u00a0';
-  function monthsWord(n) { return n === 3 ? '\u043c\u0435\u0441\u044f\u0446\u0430' : '\u043c\u0435\u0441\u044f\u0446\u0435\u0432'; }
   function select(btn) {
     for (var i = 0; i < terms.length; i++) {
       var on = terms[i] === btn;
@@ -49,9 +45,6 @@
       terms[i].setAttribute('aria-checked', on ? 'true' : 'false');
       terms[i].setAttribute('tabindex', on ? '0' : '-1');
     }
-    var m = +btn.getAttribute('data-months');
-    if (ctaTerm) ctaTerm.textContent = m + NB + monthsWord(m);
-    if (ctaPrice) ctaPrice.textContent = btn.getAttribute('data-price').replace(' ', NB) + NB + '\u20bd';
     if (cta) cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
   }
   for (var s = 0; s < terms.length; s++) {
@@ -63,7 +56,7 @@
       if (to > -1) { e.preventDefault(); select(list[to]); list[to].focus(); }
     });
   }
-  var on = document.querySelector('.club .term.is-on');
+  var on = document.querySelector('.tcard--club .term.is-on');
   if (on) select(on);
 
   document.addEventListener('click', function (e) {

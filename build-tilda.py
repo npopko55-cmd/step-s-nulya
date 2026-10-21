@@ -132,6 +132,16 @@ def clean_css(text):
 
 
 css_min = clean_css(css)
+# Картинки из CSS (фон красных полос) — тоже по полному адресу: относительный
+# путь на странице Тильды указывал бы в никуда, а в локальной симуляции
+# это не видно, потому что она лежит рядом с assets/.
+_css_map = {}
+_mf = BASE / "tilda-assets.json"
+if _mf.exists():
+    import json as _json
+    _css_map = _json.loads(_mf.read_text(encoding="utf-8"))
+css_min = re.sub(r'url\((["\']?)(assets/[^)"\']+)\1\)',
+                 lambda m: 'url(' + _css_map.get(m.group(2), CDN + '/' + m.group(2)) + ')', css_min)
 print(f"CSS: {len(css)/1024:.1f} КБ -> {len(css_min)/1024:.1f} КБ (мусор от базового лендинга вычищен)")
 
 
@@ -383,7 +393,7 @@ for name, content in files:
         label = "  — " + labels[int(name[6]) - 1]
     print(f"  {name:16} {n:>7,} chars ({n/1024:5.1f} KB)  {flag}{label}")
 print(f"\nВсего блоков: {len(files)}. Порядок: стили -> разметка -> скрипт.")
-missing = [a for a in sorted(set(re.findall(r'assets/[\w./-]+', html))) if a not in asset_map]
+missing = [a for a in sorted(set(re.findall(r'assets/[\w./-]+', html + css))) if a not in asset_map]
 print(f"Картинок пока с внешнего CDN: {len(missing)} (вписать адреса в tilda-assets.json, когда загрузят в Тильду)")
 
 
@@ -437,8 +447,8 @@ readme = """СТЕП С НУЛЯ — блоки для Тильды
 Ссылки оплаты сейчас — заглушки: walk-walk.ru/step/tarif_intensiv (интенсив) и
 walk-walk.ru/step/tarif_3m, tarif_6m, tarif_12m (клуб на 3, 6 и 12 месяцев).
 Их нужно заменить на реальные: в блоке «тарифы» это href у кнопки
-«Купить интенсив» и data-href у трёх кнопок срока «3 / 6 / 12 месяцев»
-(плюс href у красной кнопки «Купить на 12 месяцев» — это ссылка срока,
+«Попробовать СТЕП» и data-href у трёх колонок срока «3 / 6 / 12 месяцев»
+(плюс href у жёлтой кнопки «Выбрать тариф» — это ссылка срока,
 выбранного по умолчанию).
 
 Русские буквы в скрипте тоже закодированы — по той же причине: Тильда портит

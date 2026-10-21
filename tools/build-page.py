@@ -10,7 +10,8 @@ def icon(m):
     return svg.replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
 
 burst = (root / 'tools' / 'burst.svg').read_text(encoding='utf-8').strip()
-out = src.replace('@@logo@@', logo).replace('@@burst@@', burst)
+tape = 'Степ • ' * 40   # лента «СТЕП • СТЕП»: длиннее любой ширины экрана, лишнее обрезается
+out = src.replace('@@logo@@', logo).replace('@@burst@@', burst).replace('@@tape@@', tape.strip())
 out = re.sub(r'@@icon:([a-z0-9-]+)@@', icon, out)
 left = re.findall(r'@@[^@]+@@', out)
 if left:

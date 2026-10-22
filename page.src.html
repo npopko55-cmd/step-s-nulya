@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Unbounded:wght@500&family=Sofia+Sans+Extra+Condensed:ital,wght@1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=v6-2" />
+<link rel="stylesheet" href="styles.css?v=v7-1" />
 </head>
 <body>
 
@@ -19,13 +19,13 @@
      1. ПЕРВЫЙ ЭКРАН
      ============================================================ -->
 <section class="hero" id="top">
-  <div class="hero__art" aria-hidden="true"><img src="assets/v4/burst.webp" alt="" width="1494" height="1700" /></div>
+  <div class="hero__panel" aria-hidden="true">@@panel@@<img class="hero__smoke" src="assets/v4/smoke.webp" alt="" width="1363" height="822" /></div>
   <div class="wrap hero__grid">
     <div class="hero__content">
       <a class="logo" href="#top" aria-label="Шагай Дома">@@logo@@</a>
       <div class="hero__tilt">
         <span class="pill">Премьера в «Шагай Дома»</span>
-        <h1 class="hero__title">Степ <br />с&nbsp;нуля</h1>
+        <h1 class="hero__title">Степ <br /><span>с&nbsp;нуля</span></h1>
         <p class="hero__lead">Попробуй степ-аэробику вместе <br />с&nbsp;Константином Баевым</p>
         <p class="hero__text">Простые движения на&nbsp;шагах, зажигательная <br />музыка и&nbsp;тренировки, которые не&nbsp;захочется бросить.</p>
       </div>
@@ -40,6 +40,7 @@
       </ul>
     </div>
     <div class="hero__visual" aria-hidden="true">
+      <div class="hero__vpanel">@@panel@@</div>
       <span class="hero__sticker">Старт <b>2&nbsp;ноября</b></span>
       <img class="hero__img" src="assets/v4/hero.webp" alt="" width="1024" height="1829" fetchpriority="high" />
     </div>
@@ -260,6 +261,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=v6-2"></script>
+<script src="script.js?v=v7-1"></script>
 </body>
 </html>

@@ -11,7 +11,8 @@ def icon(m):
 
 burst = (root / 'tools' / 'burst.svg').read_text(encoding='utf-8').strip()
 tape = 'Степ • ' * 40   # лента «СТЕП • СТЕП»: длиннее любой ширины экрана, лишнее обрезается
-out = src.replace('@@logo@@', logo).replace('@@burst@@', burst).replace('@@tape@@', tape.strip())
+panel = (root / 'tools' / 'panel.svg').read_text(encoding='utf-8').strip()   # молния и линии скорости на красной панели
+out = src.replace('@@panel@@', panel).replace('@@logo@@', logo).replace('@@burst@@', burst).replace('@@tape@@', tape.strip())
 out = re.sub(r'@@icon:([a-z0-9-]+)@@', icon, out)
 left = re.findall(r'@@[^@]+@@', out)
 if left:

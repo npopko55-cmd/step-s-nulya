@@ -13,9 +13,10 @@
     в отдельных блоках «картинки, часть N», порезанных под лимит;
   • фото «до/после» берутся с CDN самой Тильды (static/thb.tildacdn.com) —
     они уже лежат на walk-walk.ru; адреса в tilda-assets.json;
-  • видео связок — только через Kinescope: ссылки вписываются в
-    tilda-assets.json (ключ assets/v4/svyazka-N.mp4); пока их нет, блок
-    «попробуй и оцени сложность» в сборку не попадает.
+  • видео связок — mp4 до 5 МБ, загруженные в Тильду (static.tildacdn.com),
+    или ссылки Kinescope: адреса в tilda-assets.json (ключ
+    assets/v4/svyazka-N.mp4); пока их нет, блок «попробуй и оцени
+    сложность» в сборку не попадает.
 
 Порядок вставки на странице: сначала СТИЛИ, потом блоки разметки,
 СКРИПТ — последним.
@@ -198,13 +199,17 @@ def sub_img(m):
     raise SystemExit(f"Картинке {path} нет места на Тильде: впишите адрес в tilda-assets.json или в INLINE")
 
 
-# Видео: только Kinescope. Нет ссылок — блок со связками в сборку не идёт.
+# Видео: mp4 с Тильды или Kinescope. Нет ссылок — блок со связками в сборку не идёт.
 videos = re.findall(r'<video[^>]*src="(assets/[^"]+)"', body)
 have_video = bool(videos) and all(v in asset_map for v in videos)
 
 
 def sub_video(m):
     src = asset_map[m.group(1)]
+    # mp4 загружен в саму Тильду — оставляем обычный плеер, меняем только адреса
+    if src.endswith(".mp4"):
+        tag = m.group(0).replace(f'src="{m.group(1)}"', f'src="{src}"')
+        return re.sub(r'poster="(assets/[^"]+)"', lambda p: f'poster="{asset_map[p.group(1)]}"', tag)
     return (f'<iframe src="{src}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" '
             f'allowfullscreen frameborder="0" style="display:block;width:100%;height:100%;border:0"></iframe>')
 
@@ -611,6 +616,8 @@ def css_escape(text):
 
 vibe_css = css_scoped.replace(":root{", ".shd-step{")
 vibe_files = []
+RID = {"top": 1, "why": 2, "plan": 3, "coach": 4, "tariffs": 5, "freedom": 6,
+       "inside": 7, "cases": 8, "footer": 9, "try": 10}
 for i in range(len(labels)):
     chunk = re.sub(r"\n[ \t]+", "\n", body[cuts[i]:cuts[i + 1]].strip())   # отступы вёрстки блоку не нужны
     classes = set()
@@ -620,9 +627,15 @@ for i in range(len(labels)):
     # Свой корневой класс у каждого блока: общие правила (.btn и т.п.) повторяются
     # в нескольких блоках, и без этого правило из блока ниже перебивало
     # мобильную поправку блока выше — у кнопки тарифа «разъезжались» строки.
-    rid = f"shd-b{i+1}"
+    # Номер привязан к секции, а не к позиции: блоки уже стоят в Тильде, и новый
+    # блок в середине не должен сдвигать классы остальных.
+    sid = re.search(r'<section[^>]*\bid="([^"]+)"', chunk)
+    key = sid.group(1) if sid else ("footer" if "<footer" in chunk else "")
+    rid = "shd-b" + str(RID.get(key, i + 1))
     block_css = css_for(classes, vibe_css).replace(".shd-step", f".shd-step.{rid}")
-    code = f'<div class="shd-step {rid}">\n' + chunk + "\n</div>\n<style>" + css_escape(block_css) + "</style>\n"
+    # Шрифты подключаем в первом блоке: код страницы в <head> не доходит
+    # до редактора, и без него Тильда рисовала заголовки Arial — текст наезжал.
+    code = (FONT_LINK + '\n' if i == 0 else '') + f'<div class="shd-step {rid}">\n' + chunk + "\n</div>\n<style>" + css_escape(block_css) + "</style>\n"
     if i == len(labels) - 1:
         code += "<script>\n" + js_for_tilda(js) + "\n</script>\n"
     if re.search(r"github|assets/|data-shd-img", code, re.I):

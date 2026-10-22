@@ -27,9 +27,7 @@
     }
     txt('mcCtaTerm', btn.getAttribute('data-term').replace(' ', NB));
     txt('mcCtaPrice', btn.getAttribute('data-price').replace(' ', NB) + NB + '\u20bd');
-    txt('mcKg', btn.getAttribute('data-kg') + NB + '\u043a\u0433');
     txt('mcInst', btn.getAttribute('data-inst').replace(/\B(?=(\d{3})+$)/, NB) + NB + '\u20bd');
-    var gift = root.querySelector('#mcGift'); if (gift) gift.hidden = !btn.getAttribute('data-gift');
     cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
     cta.setAttribute('data-goal', btn.getAttribute('data-goal'));
   }

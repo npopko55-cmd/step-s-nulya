@@ -63,16 +63,16 @@ svg { display: block; }
 .hero__art img { height: 100%; width: auto; max-width: none; }
 .hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); }
 .hero__content { position: relative; z-index: 2; padding-bottom: 36px; }
-.logo { display: block; width: 245px; }
+.logo { display: block; width: 230px; }
 .logo svg { width: 100%; height: auto; }
-/* наклонная часть, как в концепте: плашка, заголовок, подзаголовок, текст */
-.hero__tilt { margin-top: 30px; transform: rotate(-6deg); transform-origin: 0 50%; }
+/* плашка, заголовок, подзаголовок, текст — ровно, без наклона из концепта (так попросили) */
+.hero__tilt { margin-top: 30px; }
 .pill { display: inline-block; padding: 7px 22px; border: 3px solid var(--yellow); border-radius: 10px; font-weight: 800; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; color: var(--ink); }
 .hero__title { margin-top: 20px; font-family: var(--font-h); font-weight: 900; font-size: clamp(96px, 14.6vw, 212px); line-height: .84; letter-spacing: -.035em; text-transform: uppercase; color: var(--ink); }
 .hero__lead { margin-top: 22px; font-weight: 800; font-size: clamp(24px, 2.4vw, 35px); line-height: 1.15; color: var(--ink); }
 .hero__text { margin-top: 14px; font-weight: 500; font-size: clamp(16px, 1.4vw, 20px); line-height: 1.35; color: var(--text); }
 .hero__actions { display: flex; align-items: center; gap: 44px; margin-top: 44px; }
-.btn--hero { min-height: 80px; padding: 0 40px; font-size: 28px; transform: rotate(-6deg); }
+.btn--hero { min-height: 80px; padding: 0 40px; font-size: 28px; }
 .start { padding: 4px 0 4px 30px; border-left: 2px solid #cfcfcf; font-weight: 500; font-size: 27px; line-height: 1.2; color: var(--ink); }
 .start b { display: block; font-weight: 800; color: var(--red); }
 .facts { display: flex; gap: 40px; margin-top: 46px; }
@@ -81,6 +81,7 @@ svg { display: block; }
 .ring { flex: none; display: grid; place-items: center; width: 62px; height: 62px; border: 3px solid var(--yellow); border-radius: 50%; }
 .ring svg { width: 30px; height: 30px; color: var(--ink); }
 .hero__visual { position: relative; z-index: 5; min-height: 930px; }
+.hero__sticker { display: none; }
 .hero__img { position: absolute; bottom: -62px; left: 44%; transform: translateX(-50%); height: calc(100% + 20px); width: auto; max-width: none; filter: drop-shadow(0 26px 26px rgba(40, 10, 10, .22)); }
 .hero .tape { bottom: 16px; }
 
@@ -278,6 +279,19 @@ svg { display: block; }
 }
 
 @media (max-width: 979px) {
+  /* первый экран: логотип, плашка, заголовок, сразу Костя, потом текст, кнопка, факты */
+  .hero__content, .hero__tilt { display: contents; }
+  .logo { order: 1; }
+  .pill { order: 2; justify-self: start; margin-top: 24px; }
+  .hero__title { order: 3; }
+  .hero__visual { order: 4; }
+  .hero__lead { order: 5; }
+  .hero__text { order: 6; }
+  .hero__actions { order: 7; }
+  .facts { order: 8; }
+  .start { display: none; }
+  .hero__sticker { position: absolute; z-index: 6; left: 4%; top: 12%; display: grid; place-items: center; align-content: center; width: 132px; height: 132px; border-radius: 50%; background: var(--yellow); box-shadow: 0 12px 26px rgba(0, 0, 0, .16); transform: rotate(-10deg); font-weight: 600; font-size: 18px; line-height: 1.1; text-align: center; color: var(--ink); }
+  .hero__sticker b { display: block; font-weight: 800; font-size: 22px; color: var(--red); }
   #try { padding: 80px 0; }
   .clips { grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 640px; }
   #tariffs { padding: 80px 0 60px; }
@@ -288,9 +302,9 @@ svg { display: block; }
   .hero { padding-bottom: 70px; }
   .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__content { padding-bottom: 0; }
-  .hero__art { top: auto; bottom: 40px; height: 720px; right: -40px; }
-  .hero__visual { min-height: 0; height: 640px; }
-  .hero__img { left: 50%; bottom: -60px; height: 680px; }
+  .hero__art { display: none; }
+  .hero__visual { min-height: 0; height: 640px; margin: 26px -24px 0 0; background: url(assets/v4/burst.webp) no-repeat 100% 0 / auto 100%; }
+  .hero__img { left: 46%; bottom: 0; height: 100%; }
 
   #why { padding: 60px 0 70px; }
   .why { grid-template-columns: minmax(0, 1fr); gap: 34px; }
@@ -321,23 +335,25 @@ svg { display: block; }
   body { font-size: 16px; }
   .hero { padding-top: 20px; }
   .logo { width: 150px; }
-  .hero__tilt { margin-top: 22px; transform: rotate(-5deg); transform-origin: 40% 50%; }
   .pill { padding: 6px 14px; border-width: 2px; font-size: 14px; }
-  .hero__title { margin-top: 14px; font-size: 24vw; }
+  .hero__title { margin-top: 14px; font-size: 22vw; }
   .hero__lead { margin-top: 16px; font-size: 21px; }
   .hero__lead br, .hero__text br { display: none; }
   .hero__text { font-size: 15px; }
-  .hero__actions { flex-direction: column; align-items: flex-start; gap: 26px; margin-top: 34px; }
+  .hero__actions { margin-top: 24px; }
+  .hero__actions .btn { width: 100%; }
   .btn--hero { min-height: 62px; padding: 0 26px; font-size: 20px; }
   .btn__arrow { width: 32px; }
   .start { font-size: 20px; }
-  .facts { flex-direction: column; gap: 12px; margin-top: 30px; }
-  .facts li br { display: none; }
+  /* факты — одной строкой в три колонки */
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 22px; }
+  .facts li { flex-direction: column; gap: 8px; font-size: 13px; line-height: 1.25; text-align: center; }
   .ring { width: 46px; height: 46px; border-width: 2px; }
   .ring svg { width: 22px; height: 22px; }
-  .hero__art { height: 520px; right: -60px; }
-  .hero__visual { height: 470px; }
-  .hero__img { height: 500px; bottom: -58px; }
+  .hero__visual { height: 440px; margin-top: 26px; margin-right: -16px; }
+  .hero__img { height: 100%; bottom: 0; left: 50%; }
+  .hero__sticker { width: 104px; height: 104px; top: 8%; left: 0; font-size: 15px; }
+  .hero__sticker b { font-size: 18px; }
   .tape { height: 38px; font-size: 24px; line-height: 38px; }
 
   .why__title { font-size: 12.6vw; white-space: normal; }
@@ -381,6 +397,14 @@ svg { display: block; }
 @media (max-width: 768px) {
   .footer__brand { font-size: 30px; }
   .footer__grid { margin: 0 12px; padding: 36px 28px 28px; }
+}
+
+/* узкий телефон: подписи фактов переносятся, Костя правее — наклейка «Старт» не закрывает его */
+@media (max-width: 479px) {
+  .facts li > span:last-child { white-space: normal; }
+  .hero__img { left: 60%; }
+  .hero__sticker { top: 3%; left: -4px; width: 92px; height: 92px; font-size: 14px; }
+  .hero__sticker b { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; } }

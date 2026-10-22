@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Unbounded:wght@500&family=Sofia+Sans+Extra+Condensed:ital,wght@1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=v7-1" />
+<link rel="stylesheet" href="styles.css?v=v8-2" />
 </head>
 <body>
 
@@ -140,8 +140,9 @@
 </section>
 
 <!-- ============================================================
-     5. ТАРИФЫ — как на остальных лендингах «Шагай»: три карточки
-     сверху «только СТЕП», под ним «интенсив + клуб» (3 / 6 / 12 месяцев).
+     5. ТАРИФЫ — сверху «только СТЕП», под ним один тариф «СТЕП + клуб»
+     с выбором срока 3 / 6 / 12 месяцев (три одинаковые карточки повторяли
+     друг друга и отличались только сроком).
      Ссылки оплаты и my.walk-walk.ru/step — заглушки.
      ============================================================ -->
 <section class="band band--white" id="tariffs">
@@ -155,58 +156,106 @@
       <div class="solo__price">1&nbsp;600&nbsp;₽</div>
       <a class="btn btn--red solo__btn" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="buy-intensiv">Попробовать СТЕП</a>
     </article>
-    <div class="rates">
-      <article class="rate">
-        <span class="rate__badge">Старт</span>
-        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;3&nbsp;месяца</h3>
-        <div class="rate__price"><b>3&nbsp;700&nbsp;₽</b><span>1&nbsp;233&nbsp;₽ в&nbsp;месяц</span></div>
+    <article class="club">
+      <div class="club__info">
+        <h3 class="club__title">СТЕП с&nbsp;нуля + клуб «Шагай Дома»</h3>
+        <p class="club__sub">Один тариф: интенсив и&nbsp;весь клуб. Выберите, на&nbsp;сколько месяцев открыть доступ.</p>
         <ul class="rate__features">
           <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
           <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
           <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
           <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
           <li>Поддержка чата участников и&nbsp;куратора</li>
-          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
+          <li>25&nbsp;программ и&nbsp;400+ шагательных тренировок</li>
           <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
           <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
         </ul>
-        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_3m" data-goal="buy-club-3m">Оформить абонемент</a>
+      </div>
+      <div class="club__buy">
+        <p class="club__hint">Срок доступа к&nbsp;клубу</p>
+        <div class="terms" role="radiogroup" aria-label="Срок доступа к клубу">
+        <button class="term" type="button" role="radio" aria-checked="false" data-term="3 месяца" data-price="3 700" data-href="https://walk-walk.ru/step/tarif_3m" data-goal="buy-club-3m"><span class="term__m">3&nbsp;месяца</span><span class="term__per">1&nbsp;233&nbsp;₽ в&nbsp;месяц</span><b class="term__p">3&nbsp;700&nbsp;₽</b></button>
+        <button class="term is-on" type="button" role="radio" aria-checked="true" data-term="6 месяцев" data-price="4 800" data-href="https://walk-walk.ru/step/tarif_6m" data-goal="buy-club-6m"><span class="term__m">6&nbsp;месяцев<i>Хит продаж</i></span><span class="term__per">800&nbsp;₽ в&nbsp;месяц</span><b class="term__p">4&nbsp;800&nbsp;₽</b></button>
+        <button class="term" type="button" role="radio" aria-checked="false" data-term="12 месяцев" data-price="6 400" data-href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club-12m"><span class="term__m">12&nbsp;месяцев<i>Выгоднее всего</i></span><span class="term__per">533&nbsp;₽ в&nbsp;месяц</span><b class="term__p">6&nbsp;400&nbsp;₽</b></button>
+        </div>
+        <a class="btn btn--red btn--block club__btn" id="clubCta" href="https://walk-walk.ru/step/tarif_6m" data-goal="buy-club-6m"><span>Оформить на&nbsp;<span id="clubCtaTerm">6&nbsp;месяцев</span></span> <span>за&nbsp;<span id="clubCtaPrice">4&nbsp;800&nbsp;₽</span></span></a>
         <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     5а–5в. БЛОКИ С ГЛАВНОЙ walk-walk.ru — клуб, «всё включено», до/после
+     ============================================================ -->
+<section class="band band--white" id="freedom">
+  <div class="wrap">
+    <h2 class="club-h">Клуб «Шагай Дома»&nbsp;— <span>свобода, удобство, удовольствие</span></h2>
+    <ul class="perks">
+      <li class="perk perk--red"><b>Гибкий формат</b><span>От&nbsp;5 до&nbsp;40&nbsp;минут в&nbsp;зависимости от&nbsp;занятости сегодня.</span></li>
+      <li class="perk"><b>Простая аэробика</b><span>Не&nbsp;нужно быть спортивной и&nbsp;уметь танцевать.</span></li>
+      <li class="perk perk--yellow"><b>Под зажигательную музыку</b><span>Движение в&nbsp;кайф, вместо «ещё потерпи».</span></li>
+      <li class="perk"><b>Прямо из&nbsp;дома</b><span>Не&nbsp;нужно собирать сумку или выкраивать расписание.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band band--white" id="inside">
+  <div class="wrap">
+    <h2 class="club-h">Занимайтесь как удобно,&nbsp;<span>всё включено</span></h2>
+    <div class="inside">
+      <article class="tile tile--plan">
+        <h3>По&nbsp;плану недели</h3>
+        <p>Не&nbsp;хотите выбирать? Есть расписание тренировок на&nbsp;каждый день.</p>
+        <img src="assets/v4/plan-week.webp" alt="" width="640" height="640" loading="lazy" />
       </article>
-      <article class="rate rate--featured">
-        <span class="rate__badge">Хит продаж</span>
-        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;6&nbsp;месяцев</h3>
-        <div class="rate__price"><b>4&nbsp;800&nbsp;₽</b><span>800&nbsp;₽ в&nbsp;месяц</span></div>
-        <ul class="rate__features">
-          <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
-          <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
-          <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
-          <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
-          <li>Поддержка чата участников и&nbsp;куратора</li>
-          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
-          <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
-          <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
-        </ul>
-        <a class="btn btn--white btn--block" href="https://walk-walk.ru/step/tarif_6m" data-goal="buy-club-6m">Оформить абонемент</a>
-        <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      <article class="tile tile--fm">
+        <h3>Шагай.FM</h3>
+        <b class="tile__kicker">Нон-стоп фитнес-эфир</b>
+        <p>Включайте и&nbsp;шагайте с&nbsp;тренером под треки нашего DJ.</p>
+        <img src="assets/v4/fm.webp" alt="" width="568" height="900" loading="lazy" />
       </article>
-      <article class="rate">
-        <span class="rate__badge">По&nbsp;максимуму</span>
-        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;12&nbsp;месяцев</h3>
-        <div class="rate__price"><b>6&nbsp;400&nbsp;₽</b><span>533&nbsp;₽ в&nbsp;месяц</span></div>
-        <ul class="rate__features">
-          <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
-          <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
-          <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
-          <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
-          <li>Поддержка чата участников и&nbsp;куратора</li>
-          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
-          <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
-          <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
-        </ul>
-        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club-12m">Оформить абонемент</a>
-        <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      <article class="tile tile--progs">
+        <h3>По&nbsp;готовым программам и&nbsp;курсам</h3>
+        <p>Выберите цель или настроение: похудение, лёгкий старт, табата и&nbsp;другие программы.</p>
+        <div class="tile__nums"><div><b>25</b><span>фитнес-программ</span></div><div><b>400+</b><span>тренировок</span></div></div>
       </article>
+    </div>
+    <div class="inside__cta">
+      @@icon:lightning-fill@@
+      <div><b>Получить доступ ко&nbsp;всему</b><span>План недели, Шагай.FM, все программы и&nbsp;400+ тренировок.</span></div>
+      <a class="btn btn--yellow" href="#tariffs" data-goal="inside-cta">Выбрать абонемент <span class="btn__arrow" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--white" id="cases">
+  <div class="wrap">
+    <h2 class="club-h">Они шагали по&nbsp;<span>20&nbsp;минут в&nbsp;день</span> и&nbsp;у&nbsp;них получилось!</h2>
+    <div class="cases">
+      <button class="cases__nav cases__nav--prev" type="button" aria-label="Предыдущие результаты" aria-controls="casesTrack">@@icon:caret-double-right-bold@@</button>
+      <ul class="cases__track" id="casesTrack" tabindex="0" aria-label="Результаты участниц, листается вбок">
+        <li class="case"><img src="assets/v4/cases/case-01.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-02.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-03.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-04.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-05.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-06.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-07.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-08.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-09.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-10.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-11.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-12.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-13.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-14.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-15.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-16.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-17.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-18.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+        <li class="case"><img src="assets/v4/cases/case-19.webp" alt="Участница клуба до и после" width="560" height="560" loading="lazy" /></li>
+      </ul>
+      <button class="cases__nav cases__nav--next" type="button" aria-label="Следующие результаты" aria-controls="casesTrack">@@icon:caret-double-right-bold@@</button>
     </div>
   </div>
 </section>
@@ -261,6 +310,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=v7-1"></script>
+<script src="script.js?v=v8-2"></script>
 </body>
 </html>

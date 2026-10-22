@@ -36,6 +36,48 @@
     try { if (typeof window.ym === 'function') window.ym(METRIKA_ID, 'reachGoal', 'step-' + el.getAttribute('data-goal')); } catch (err) {}
   });
 
+  var terms = document.querySelectorAll('.club .term');
+  var cta = document.getElementById('clubCta');
+  var ctaTerm = document.getElementById('clubCtaTerm');
+  var ctaPrice = document.getElementById('clubCtaPrice');
+  var NB = '\u00a0';
+  function select(btn) {
+    for (var i = 0; i < terms.length; i++) {
+      var on = terms[i] === btn;
+      terms[i].classList.toggle('is-on', on);
+      terms[i].setAttribute('aria-checked', on ? 'true' : 'false');
+      terms[i].setAttribute('tabindex', on ? '0' : '-1');
+    }
+    if (ctaTerm) ctaTerm.textContent = btn.getAttribute('data-term').replace(' ', NB);
+    if (ctaPrice) ctaPrice.textContent = btn.getAttribute('data-price').replace(' ', NB) + NB + '\u20bd';
+    if (cta) {
+      cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
+      cta.setAttribute('data-goal', btn.getAttribute('data-goal'));
+    }
+  }
+  for (var s = 0; s < terms.length; s++) {
+    terms[s].addEventListener('click', function () { select(this); });
+    terms[s].addEventListener('keydown', function (e) {
+      var list = Array.prototype.slice.call(terms), idx = list.indexOf(this), to = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (idx + 1) % list.length;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (idx - 1 + list.length) % list.length;
+      if (to > -1) { e.preventDefault(); select(list[to]); list[to].focus(); }
+    });
+  }
+  var on = document.querySelector('.club .term.is-on');
+  if (on) select(on);
+
+  var track = document.getElementById('casesTrack');
+  var navs = document.querySelectorAll('.cases__nav');
+  for (var n = 0; n < navs.length; n++) {
+    navs[n].addEventListener('click', function () {
+      if (!track) return;
+      var dir = this.classList.contains('cases__nav--prev') ? -1 : 1;
+      var step = Math.max(track.clientWidth * 0.85, 240);
+      try { track.scrollBy({ left: dir * step, behavior: 'smooth' }); } catch (err) { track.scrollLeft += dir * step; }
+    });
+  }
+
   var year = document.getElementById('footerYear');
   if (year) year.textContent = new Date().getFullYear();
 

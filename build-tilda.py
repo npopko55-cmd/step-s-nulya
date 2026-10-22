@@ -369,9 +369,11 @@ def pos(patt):
 
 
 cuts = [pos(r'<section[^>]*id="top"'), pos(r'<section[^>]*id="why"'), pos(r'<section[^>]*id="plan"'), pos(r'<section[^>]*id="try"'),
-        pos(r'<section[^>]*id="coach"'), pos(r'<section[^>]*id="tariffs"'), pos(r'<footer'), len(body)]
+        pos(r'<section[^>]*id="coach"'), pos(r'<section[^>]*id="tariffs"'),
+        pos(r'<section[^>]*id="freedom"'), pos(r'<section[^>]*id="inside"'), pos(r'<section[^>]*id="cases"'), pos(r'<footer'), len(body)]
 labels = ["первый экран", "кардио может быть зажигательным",
-          "освой степ за 7 тренировок", "попробуй и оцени сложность", "тренер Константин Баев", "тарифы", "подвал"]
+          "освой степ за 7 тренировок", "попробуй и оцени сложность", "тренер Константин Баев", "тарифы",
+          "клуб — свобода, удобство, удовольствие", "занимайтесь как удобно", "до и после", "подвал"]
 for i in range(len(labels)):
     chunk = body[cuts[i]:cuts[i+1]]
     files.append((f"block-{i+1}.html",
@@ -390,7 +392,7 @@ for name, content in files:
     flag = "OK" if n < LIMIT else "!! ПРЕВЫШЕН ЛИМИТ"
     label = ""
     if name.startswith("block-"):
-        label = "  — " + labels[int(name[6]) - 1]
+        label = "  — " + labels[int(name[6:-5]) - 1]
     print(f"  {name:16} {n:>7,} chars ({n/1024:5.1f} KB)  {flag}{label}")
 print(f"\nВсего блоков: {len(files)}. Порядок: стили -> разметка -> скрипт.")
 missing = [a for a in sorted(set(re.findall(r'assets/[\w./-]+', html + css))) if a not in asset_map]

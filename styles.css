@@ -570,3 +570,7 @@ svg { display: block; }
   .stepbox__t { font-size: 28px; }
   .stepbox__d { font-size: 15px; }
 }
+
+/* в кнопке оплаты две части текста — между ними обычный пробел, а не отступ кнопки */
+.club__btn { gap: .3em; }
+@media (max-width: 599px) { .club__btn { gap: 2px; } }

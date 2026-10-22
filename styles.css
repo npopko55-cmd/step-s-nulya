@@ -305,10 +305,26 @@ svg { display: block; }
 .tile { position: relative; min-height: 360px; overflow: hidden; padding: 28px 26px; border-radius: 20px; }
 .tile h3 { position: relative; z-index: 1; max-width: 11em; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 38px; line-height: .95; text-transform: uppercase; }
 .tile p { position: relative; z-index: 1; max-width: 15em; margin-top: 12px; font-size: 16px; line-height: 1.4; }
-.tile img { position: absolute; max-width: none; }
-.tile--plan { background: var(--red) url(assets/v4/red.webp) center / cover; color: var(--white); }
-.tile--plan p { max-width: 11em; }
-.tile--plan img { right: -2px; bottom: -2px; width: 72%; height: auto; }
+.tile--fm img { position: absolute; max-width: none; }
+.tile--plan { display: flex; flex-direction: column; background: var(--red) url(assets/v4/red.webp) center / cover; color: var(--white); }
+.tile--plan p { max-width: 14em; }
+/* карточка «Моя неделя» — как в приложении клуба, свёрстана, а не картинкой */
+.week { align-self: flex-end; width: min(100%, 270px); margin-top: auto; padding: 14px 14px 12px; border-radius: 14px; background: var(--white); box-shadow: 0 14px 30px rgba(60, 10, 0, .3); color: var(--ink); }
+.week__title { display: block; font-weight: 800; font-size: 16px; }
+.week__days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; font-weight: 600; font-size: 10px; text-align: center; color: var(--muted); }
+.week__days li { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.week__days i { position: relative; width: 22px; height: 22px; border-radius: 50%; background: #e7e2dd; }
+.week__days .done i { background: var(--red); }
+.week__days .today i { background: var(--yellow); }
+.week__days .done i::after, .week__days .today i::after { content: ""; position: absolute; left: 7px; top: 5px; width: 6px; height: 10px; border: solid var(--white); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.week__days .today { color: var(--ink); }
+.week__video { position: relative; margin-top: 10px; overflow: hidden; border-radius: 10px; aspect-ratio: 16 / 9; background: #222; }
+.week__video img { width: 100%; height: 100%; object-fit: cover; }
+.week__play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: var(--white); color: var(--red); }
+.week__play svg { width: 16px; height: 16px; margin-left: 2px; }
+.week__foot { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 8px; }
+.week__foot b { font-weight: 800; font-size: 15px; }
+.week__foot span { font-size: 11px; color: var(--muted); }
 .tile--fm { background: #fdf3ea; color: var(--ink); }
 .tile--fm p { max-width: 10em; }
 .tile__kicker { position: relative; z-index: 1; display: block; margin-top: 8px; font-weight: 800; font-size: 15px; color: var(--red); }
@@ -349,9 +365,10 @@ svg { display: block; }
   .inside { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tile--plan { grid-column: 1 / -1; min-height: 250px; }
   .tile { min-height: 300px; }
-  .tile--plan img { width: 36%; }
+  .tile--plan { display: grid; grid-template-columns: minmax(0, 1fr) 270px; grid-template-rows: auto 1fr; column-gap: 24px; }
+  .tile--plan .week { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
   .tile--fm p { max-width: 8em; }
-  .tile--fm img { height: 78%; right: -20px; }
+  .tile--fm img { height: 70%; right: 0; }
   .tile__nums b { font-size: 56px; }
   .inside__cta { grid-template-columns: auto minmax(0, 1fr); }
   .inside__cta .btn { grid-column: 1 / -1; }
@@ -360,18 +377,21 @@ svg { display: block; }
 }
 @media (max-width: 599px) {
   #freedom { padding-top: 10px; }
-  .club-h { font-size: 11.4vw; }
+  /* на телефоне заголовки блоков по левому краю, как все остальные */
+  .club-h { margin-inline: 0; font-size: 11.4vw; text-align: left; }
   .perks { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 28px; }
   .perk { padding: 22px 20px; }
   .perk b { font-size: 30px; }
   .inside { margin-top: 28px; gap: 12px; }
   .tile { min-height: 270px; padding: 22px 20px; }
   .tile h3 { font-size: 30px; }
-  .tile--plan img { width: 52%; }
-  .tile--plan p, .tile--fm p { max-width: 9.5em; }
+  .tile--plan { display: flex; min-height: 0; }
+  .week { align-self: stretch; width: auto; margin-top: 20px; }
+  .tile--fm { min-height: 250px; }
+  .tile--fm p { max-width: 9.5em; }
   .inside { grid-template-columns: minmax(0, 1fr); }
   .tile--fm .tile__kicker { max-width: 9em; }
-  .tile--fm img { right: 0; height: 76%; }
+  .tile--fm img { right: -4px; height: 100%; }
   .tile__nums b { font-size: 62px; }
   .cases__track { grid-auto-columns: 78%; gap: 12px; margin-right: -16px; padding-right: 16px; }
 }

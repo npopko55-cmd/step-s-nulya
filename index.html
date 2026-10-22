@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Unbounded:wght@500&family=Sofia+Sans+Extra+Condensed:ital,wght@1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=v8-2" />
+<link rel="stylesheet" href="styles.css?v=v8-3" />
 </head>
 <body>
 
@@ -207,7 +207,12 @@
       <article class="tile tile--plan">
         <h3>По&nbsp;плану недели</h3>
         <p>Не&nbsp;хотите выбирать? Есть расписание тренировок на&nbsp;каждый день.</p>
-        <img src="assets/v4/plan-week.webp" alt="" width="640" height="640" loading="lazy" />
+        <div class="week" aria-hidden="true">
+          <b class="week__title">Моя неделя</b>
+          <ol class="week__days"><li class="done"><i></i>Пн</li><li class="done"><i></i>Вт</li><li class="done"><i></i>Ср</li><li class="today"><i></i>Чт</li><li><i></i>Пт</li><li><i></i>Сб</li><li><i></i>Вс</li></ol>
+          <div class="week__video"><img src="assets/v4/svyazka-1.webp" alt="" width="1280" height="720" loading="lazy" /><span class="week__play"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg></span></div>
+          <div class="week__foot"><b>Четверг</b><span>Шаговая тренировка · 20&nbsp;мин</span></div>
+        </div>
       </article>
       <article class="tile tile--fm">
         <h3>Шагай.FM</h3>
@@ -310,6 +315,6 @@
   </div>
 </footer>
 
-<script src="script.js?v=v8-2"></script>
+<script src="script.js?v=v8-3"></script>
 </body>
 </html>

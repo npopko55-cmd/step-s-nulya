@@ -10,8 +10,8 @@
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Sofia+Sans+Extra+Condensed:ital,wght@1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=v4-1" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@900&family=Unbounded:wght@500&family=Sofia+Sans+Extra+Condensed:ital,wght@1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=v5-1" />
 </head>
 <body>
 
@@ -78,6 +78,46 @@
 </section>
 
 <!-- ============================================================
+     3а. ПОПРОБУЙ И ОЦЕНИ СЛОЖНОСТЬ — три связки Кости (видео 1, 2, 4
+     с Диска; самую сложную, №3, по просьбе Никиты не ставим)
+     ============================================================ -->
+<section class="band band--soft" id="try">
+  <div class="wrap">
+    <h2 class="try__title">Попробуй и&nbsp;оцени сложность</h2>
+    <p class="try__lead">Три связки с&nbsp;Костей&nbsp;— от&nbsp;самой простой к&nbsp;посложнее. Включи, повтори вместе с&nbsp;ним и&nbsp;пойми, с&nbsp;чего начать.</p>
+    <div class="clips">
+      <article class="clip">
+        <div class="clip__video"><video src="assets/v4/svyazka-1.mp4" poster="assets/v4/svyazka-1.webp" controls playsinline preload="none" width="1280" height="720"></video></div>
+        <div class="clip__meta">
+          <span class="clip__level" aria-label="Сложность 1 из 3"><i class="on"></i><i></i><i></i></span>
+          <b class="clip__name">Связка 1</b>
+          <span class="clip__label">Самая простая</span>
+          <span class="clip__dur">3:13</span>
+        </div>
+      </article>
+      <article class="clip">
+        <div class="clip__video"><video src="assets/v4/svyazka-2.mp4" poster="assets/v4/svyazka-2.webp" controls playsinline preload="none" width="1280" height="720"></video></div>
+        <div class="clip__meta">
+          <span class="clip__level" aria-label="Сложность 2 из 3"><i class="on"></i><i class="on"></i><i></i></span>
+          <b class="clip__name">Связка 2</b>
+          <span class="clip__label">Посложнее</span>
+          <span class="clip__dur">2:30</span>
+        </div>
+      </article>
+      <article class="clip">
+        <div class="clip__video"><video src="assets/v4/svyazka-3.mp4" poster="assets/v4/svyazka-3.webp" controls playsinline preload="none" width="1280" height="720"></video></div>
+        <div class="clip__meta">
+          <span class="clip__level" aria-label="Сложность 3 из 3"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+          <b class="clip__name">Связка 3</b>
+          <span class="clip__label">Ещё посложнее</span>
+          <span class="clip__dur">4:07</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      4. ТРЕНЕР
      ============================================================ -->
 <section class="band band--red band--coach" id="coach">
@@ -98,32 +138,127 @@
 </section>
 
 <!-- ============================================================
-     5. ТАРИФЫ
-     Ссылки оплаты — заглушки walk-walk.ru/step/tarif_*.
+     5. ТАРИФЫ — как на остальных лендингах «Шагай»: три карточки
+     «интенсив + клуб» (3 / 6 / 12 месяцев) и отдельно «только СТЕП».
+     Ссылки оплаты и my.walk-walk.ru/step — заглушки.
      ============================================================ -->
 <section class="band band--white" id="tariffs">
-  <div class="wrap tariffs">
-    <h2 class="tariffs__title">Выберите <br />свой формат</h2>
-
-    <article class="tcard">
-      <h3 class="tcard__name">Степ с&nbsp;нуля</h3>
-      <p class="tcard__term">1 месяц</p>
-      <p class="tcard__price">1&nbsp;600&nbsp;₽</p>
-      <a class="btn btn--red tcard__btn" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="buy-intensiv">Попробовать СТЕП</a>
-    </article>
-
-    <article class="tcard tcard--club">
-      <h3 class="tcard__name">Степ с&nbsp;нуля + полный доступ в&nbsp;клуб</h3>
-      <div class="terms" role="radiogroup" aria-label="Срок доступа">
-        <button class="term" type="button" role="radio" aria-checked="false" data-months="3" data-href="https://walk-walk.ru/step/tarif_3m"><span class="tcard__term">3 месяца</span><b class="tcard__price">3&nbsp;700&nbsp;₽</b></button>
-        <button class="term" type="button" role="radio" aria-checked="false" data-months="6" data-href="https://walk-walk.ru/step/tarif_6m"><span class="tcard__term">6 месяцев</span><b class="tcard__price">4&nbsp;700&nbsp;₽</b></button>
-        <button class="term is-on" type="button" role="radio" aria-checked="true" data-months="12" data-href="https://walk-walk.ru/step/tarif_12m"><i class="term__badge">Выгоднее всего</i><span class="tcard__term">12 месяцев</span><b class="tcard__price">6&nbsp;400&nbsp;₽</b></button>
+  <div class="wrap">
+    <h2 class="tariffs__title">Выберите свой формат</h2>
+    <div class="rates">
+      <article class="rate">
+        <span class="rate__badge">Старт</span>
+        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;3&nbsp;месяца</h3>
+        <div class="rate__price"><b>3&nbsp;700&nbsp;₽</b><span>1&nbsp;233&nbsp;₽ в&nbsp;месяц</span></div>
+        <ul class="rate__features">
+          <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
+          <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
+          <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
+          <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
+          <li>Поддержка чата участников и&nbsp;куратора</li>
+          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
+          <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
+          <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
+        </ul>
+        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_3m" data-goal="buy-club-3m">Оформить абонемент</a>
+        <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      </article>
+      <article class="rate rate--featured">
+        <span class="rate__badge">Хит продаж</span>
+        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;6&nbsp;месяцев</h3>
+        <div class="rate__price"><b>4&nbsp;800&nbsp;₽</b><span>800&nbsp;₽ в&nbsp;месяц</span></div>
+        <ul class="rate__features">
+          <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
+          <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
+          <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
+          <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
+          <li>Поддержка чата участников и&nbsp;куратора</li>
+          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
+          <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
+          <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
+        </ul>
+        <a class="btn btn--white btn--block" href="https://walk-walk.ru/step/tarif_6m" data-goal="buy-club-6m">Оформить абонемент</a>
+        <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      </article>
+      <article class="rate">
+        <span class="rate__badge">По&nbsp;максимуму</span>
+        <h3 class="rate__title">СТЕП с&nbsp;нуля + клуб на&nbsp;12&nbsp;месяцев</h3>
+        <div class="rate__price"><b>6&nbsp;400&nbsp;₽</b><span>533&nbsp;₽ в&nbsp;месяц</span></div>
+        <ul class="rate__features">
+          <li class="rate__hero">Интенсив «СТЕП с&nbsp;нуля»:</li>
+          <li class="rate__bright">7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым</li>
+          <li class="rate__bright">От&nbsp;базовых шагов к&nbsp;полноценным связкам</li>
+          <li class="rate__hero">Абонемент в&nbsp;клуб «Шагай Дома»:</li>
+          <li>Поддержка чата участников и&nbsp;куратора</li>
+          <li>25&nbsp;программ и&nbsp;350+ шагательных тренировок</li>
+          <li>60&nbsp;рецептов полезной еды, вебинары про здоровье</li>
+          <li>30&nbsp;тренировок для здоровья спины и&nbsp;растяжек</li>
+        </ul>
+        <a class="btn btn--red btn--block" href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club-12m">Оформить абонемент</a>
+        <a class="rate__alt" href="https://my.walk-walk.ru/step" target="_blank" rel="noopener" data-goal="have-subscription">У&nbsp;меня уже есть абонемент</a>
+      </article>
+    </div>
+    <article class="solo">
+      <div class="solo__text">
+        <h3 class="solo__title">Только СТЕП с&nbsp;нуля</h3>
+        <p>7&nbsp;тренировок по&nbsp;15&nbsp;минут с&nbsp;Константином Баевым, без абонемента в&nbsp;клуб</p>
       </div>
-      <a class="btn btn--yellow tcard__btn" id="clubCta" href="https://walk-walk.ru/step/tarif_12m" data-goal="buy-club">Выбрать тариф</a>
+      <div class="solo__price">1&nbsp;600&nbsp;₽</div>
+      <a class="btn btn--red solo__btn" href="https://walk-walk.ru/step/tarif_intensiv" data-goal="buy-intensiv">Попробовать СТЕП</a>
     </article>
   </div>
 </section>
 
-<script src="script.js?v=v4-1"></script>
+<!-- ============================================================
+     6. ПОДВАЛ — стандартный для лендингов «Шагай Дома»
+     (тот же, что на Антиотёке, Здоровых ногах, Табате)
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer__grid">
+    <div class="footer__col footer__col--main">
+      <h2 class="footer__brand">Шагай Дома</h2>
+      <div class="footer__phones">
+        <p class="footer__phones-title">Телефоны наших менеджеров:</p>
+        <p><a href="tel:+79990668100">+7&nbsp;(999)&nbsp;066-81-00</a> — Отдел заботы о&nbsp;клиентах (Анна и&nbsp;Катя)</p>
+        <p><a href="tel:+905510983369">+90&nbsp;(551)&nbsp;098-33-69</a> — Отдел заботы о&nbsp;клиентах (Александра)</p>
+      </div>
+      <ul class="footer__links">
+        <li><a href="https://walk-walk.ru/privacy" target="_blank" rel="noopener">Политика конфиденциальности</a></li>
+        <li><a href="https://walk-walk.ru/offer" target="_blank" rel="noopener">Публичная оферта</a></li>
+        <li><a href="https://walk-walk.ru/ad" target="_blank" rel="noopener">Согласие на&nbsp;рекламную рассылку</a></li>
+        <li><a href="https://walk-walk.ru/approval" target="_blank" rel="noopener">Согласие на&nbsp;обработку персональных данных</a></li>
+        <li><a href="https://walk-walk.ru/safe" target="_blank" rel="noopener">Список противопоказаний</a></li>
+        <li><a href="https://walk-walk.ru/education" target="_blank" rel="noopener">Сведения об&nbsp;образовательной организации</a></li>
+        <li><a href="https://edu.gov.ru/" target="_blank" rel="noopener">Министерство просвещения РФ</a></li>
+      </ul>
+    </div>
+    <div class="footer__col footer__col--legal">
+      <p>ИП Кириченко Дмитрий Павлович</p>
+      <p>ОГРНИП: 316222500086383</p>
+      <p>ИНН: 222391942312</p>
+      <div class="footer__socials">
+        <a href="https://vk.com/walk_is_love" target="_blank" rel="noopener" aria-label="ВКонтакте">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12.785 16.241s.288-.032.435-.193c.135-.148.13-.426.13-.426s-.018-1.298.582-1.49c.591-.188 1.35 1.254 2.155 1.808.609.42 1.072.328 1.072.328l2.155-.031s1.127-.07.593-.96c-.044-.073-.311-.659-1.604-1.864-1.354-1.262-1.172-1.058.458-3.249.993-1.334 1.39-2.149 1.266-2.498-.118-.332-.853-.244-.853-.244l-2.446.015s-.181-.025-.315.056c-.131.08-.215.265-.215.265s-.385.99-.9 1.831c-1.083 1.775-1.516 1.869-1.693 1.755-.412-.266-.31-1.075-.31-1.65 0-1.795.272-2.543-.531-2.738-.266-.064-.462-.107-1.143-.114-.874-.009-1.613.003-2.032.208-.279.136-.494.439-.363.456.162.022.529.099.724.365.252.342.243 1.113.243 1.113s.144 2.116-.337 2.378c-.331.18-.785-.187-1.751-1.852-.495-.852-.869-1.794-.869-1.794s-.072-.176-.201-.27c-.156-.114-.374-.15-.374-.15l-2.325.015s-.349.01-.477.161c-.114.135-.009.413-.009.413s1.821 4.259 3.884 6.406c1.892 1.967 4.04 1.838 4.04 1.838h.973z"/></svg>
+        </a>
+        <a href="https://dzen.ru/walkislove" target="_blank" rel="noopener" aria-label="Дзен">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c1.244 5.376 2.124 6.256 7.5 7.5-5.376 1.244-6.256 2.124-7.5 7.5-1.244-5.376-2.124-6.256-7.5-7.5 5.376-1.244 6.256-2.124 7.5-7.5z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@walk_is_love" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.546 15.568V8.432L15.818 12l-6.272 3.568z"/></svg>
+        </a>
+        <a href="https://ok.ru/group/70000006886921" target="_blank" rel="noopener" aria-label="Одноклассники">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 1.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3.66 6.6a8.32 8.32 0 0 1-2.18.93l1.99 2a1.65 1.65 0 1 1-2.34 2.34L12 17.34l-2.12 2.13a1.65 1.65 0 0 1-2.34-2.34l1.99-2a8.32 8.32 0 0 1-2.19-.93 1.65 1.65 0 0 1 1.73-2.8c1.83 1.13 4.05 1.13 5.87 0a1.65 1.65 0 0 1 1.73 2.8z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__bottom-inner">
+      <span>© ИП Кириченко Д.П., <span id="footerYear">2026</span>&nbsp;· Шагай Дома</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js?v=v5-1"></script>
 </body>
 </html>

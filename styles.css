@@ -6,9 +6,9 @@
    «СТЕП», цифры и иконки, как в концепте.
    ========================================================================== */
 :root {
-  --red: #e1121b;
-  --red-deep: #b80a12;
-  --red-bg: #d40f19;
+  --red: #ce2c01;      /* фирменный красный «Шагай Дома», как на остальных лендингах */
+  --red-deep: #b52700;
+  --red-bg: #ce2c01;
   --yellow: #ffc400;
   --ink: #141414;
   --text: #2c2c2c;
@@ -33,18 +33,19 @@ svg { display: block; }
 
 .wrap { position: relative; width: min(100% - 120px, var(--wrap)); margin-inline: auto; }
 /* заголовки блоков — узкий курсив капслоком */
-.why__title, .plan__title, .coach__title, .tariffs__title { font-family: var(--font-x); font-weight: 900; font-style: italic; line-height: .9; text-transform: uppercase; letter-spacing: .005em; }
+.why__title, .plan__title, .try__title, .coach__title, .tariffs__title { font-family: var(--font-x); font-weight: 900; font-style: italic; line-height: .9; text-transform: uppercase; letter-spacing: .005em; }
 .num { font-family: var(--font-x); font-weight: 900; font-style: italic; line-height: .85; }
 
 /* ---------- кнопки ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 16px; border: 0; border-radius: 10px; font-family: var(--font-b); font-weight: 800; line-height: 1.1; text-align: center; transition: background .2s var(--ease), transform .15s var(--ease), box-shadow .2s var(--ease); }
-.btn--red { background: linear-gradient(180deg, #f2232b, var(--red) 55%, #c90c14); color: var(--white); box-shadow: 0 14px 30px rgba(225, 18, 27, .32); }
-.btn--yellow { background: var(--yellow); color: var(--ink); box-shadow: 0 10px 24px rgba(255, 196, 0, .35); }
+.btn--red { background: linear-gradient(180deg, #e2400f, var(--red) 55%, #b82700); color: var(--white); box-shadow: 0 14px 30px rgba(206, 44, 1, .32); }
+.btn--white { background: var(--white); color: var(--red); box-shadow: 0 10px 24px rgba(80, 20, 0, .18); }
+.btn--block { width: 100%; }
 .btn__arrow { position: relative; width: 46px; height: 2px; background: currentColor; transition: transform .2s var(--ease); }
 .btn__arrow::after { content: ""; position: absolute; right: -1px; top: -5px; width: 12px; height: 12px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
 @media (hover: hover) {
-  .btn--red:hover { background: linear-gradient(180deg, #e01820, var(--red-deep)); }
-  .btn--yellow:hover { background: #ffb800; }
+  .btn--red:hover { background: linear-gradient(180deg, #d63505, var(--red-deep)); }
+  .btn--white:hover { background: #fff3ee; }
   .btn:hover .btn__arrow { transform: translateX(4px); }
 }
 
@@ -122,6 +123,29 @@ svg { display: block; }
 .steps__arrow svg { width: 34px; height: 34px; color: var(--red); }
 
 /* ==========================================================================
+   3а. ПОПРОБУЙ И ОЦЕНИ СЛОЖНОСТЬ — три видео-связки
+   ========================================================================== */
+.band--soft { background: #f4f2ef; }
+#try { padding: 90px 0 96px; }
+.try__title { font-size: clamp(46px, 5.6vw, 82px); color: var(--ink); }
+.try__lead { max-width: 40em; margin-top: 16px; font-size: 20px; line-height: 1.4; color: var(--text); }
+.clips { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+.clip { overflow: hidden; border: 1.5px solid var(--line); border-radius: 18px; background: var(--white); box-shadow: 0 12px 30px rgba(0, 0, 0, .06); }
+.clip__video { aspect-ratio: 16 / 9; background: #111; }
+.clip__video video { display: block; width: 100%; height: 100%; object-fit: cover; background: #111; }
+.clip__meta { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "level name dur" "level label dur"; column-gap: 16px; align-items: center; padding: 18px 22px 20px; }
+/* шкала сложности: три столбика, закрашено столько, какой уровень */
+.clip__level { grid-area: level; display: flex; align-items: flex-end; gap: 4px; height: 34px; }
+.clip__level i { width: 9px; border-radius: 3px; background: #e2ddd7; }
+.clip__level i:nth-child(1) { height: 40%; }
+.clip__level i:nth-child(2) { height: 70%; }
+.clip__level i:nth-child(3) { height: 100%; }
+.clip__level i.on { background: var(--red); }
+.clip__name { grid-area: name; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 30px; line-height: 1; text-transform: uppercase; color: var(--ink); }
+.clip__label { grid-area: label; margin-top: 4px; font-weight: 600; font-size: 16px; color: var(--red); }
+.clip__dur { grid-area: dur; font-weight: 600; font-size: 14px; color: var(--muted); }
+
+/* ==========================================================================
    4. ТРЕНЕР
    ========================================================================== */
 .band--coach { padding: 104px 0 0; }
@@ -143,27 +167,63 @@ svg { display: block; }
 /* ==========================================================================
    5. ТАРИФЫ
    ========================================================================== */
-#tariffs { padding: 80px 0 110px; }
-.tariffs { display: grid; grid-template-columns: minmax(0, .74fr) minmax(0, .66fr) minmax(0, 1.6fr); gap: 30px; align-items: stretch; }
-.tariffs__title { align-self: center; font-size: clamp(46px, 4.4vw, 64px); color: var(--ink); white-space: nowrap; }
-.tcard { display: flex; flex-direction: column; align-items: center; padding: 26px 24px 24px; border: 1.5px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: 0 14px 34px rgba(0, 0, 0, .07); text-align: center; }
-.tcard__name { width: 100%; padding-bottom: 18px; border-bottom: 1.5px solid var(--line); font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 36px; line-height: 1; text-transform: uppercase; color: var(--ink); }
-.tcard__term { display: block; margin-top: 22px; font-weight: 800; font-size: 16px; letter-spacing: .02em; text-transform: uppercase; color: var(--red); }
-.tcard__price { display: block; margin-top: 8px; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 68px; line-height: 1; color: var(--ink); white-space: nowrap; }
-.tcard__btn { width: 100%; min-height: 58px; margin-top: auto; padding: 0 12px; font-size: 17px; white-space: nowrap; }
-.tcard > .tcard__price { margin-bottom: 22px; }
-.tcard--club { border: 3px solid var(--yellow); padding: 26px 30px 26px; }
-.term .tcard__price { font-size: 58px; }
-.terms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin: 14px 0 22px; }
-.term { position: relative; display: flex; flex-direction: column; align-items: center; padding: 12px 8px 14px; border: 0; border-radius: 14px; background: transparent; transition: background .2s var(--ease); }
-.term + .term::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 10px; width: 1.5px; background: var(--line); }
-.term .tcard__term { margin-top: 16px; }
-.term.is-on { background: #fff5d1; }
-.term.is-on::before, .term.is-on + .term::before { opacity: 0; }
-.term__badge { position: absolute; top: -4px; left: 50%; transform: translateX(-50%); padding: 3px 12px; border-radius: 6px; background: var(--yellow); font-weight: 800; font-size: 12px; letter-spacing: .03em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-.term:focus-visible { outline: 3px solid rgba(225, 18, 27, .35); outline-offset: 2px; }
-@media (hover: hover) { .term:not(.is-on):hover { background: #fafafa; } }
-.tcard--club .tcard__btn { min-height: 64px; font-weight: 700; font-size: 22px; }
+
+/* ==========================================================================
+   5. ТАРИФЫ — как на остальных лендингах «Шагай»: три карточки
+   «интенсив + клуб», средняя — «Хит продаж» на красном; ниже «только СТЕП»
+   ========================================================================== */
+#tariffs { padding: 90px 0 70px; }
+.tariffs__title { font-size: clamp(46px, 5.6vw, 82px); color: var(--ink); }
+.rates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; margin-top: 56px; }
+.rate { position: relative; display: flex; flex-direction: column; padding: 40px 30px 26px; border: 1.5px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 14px 34px rgba(0, 0, 0, .07); }
+.rate__badge { position: absolute; top: -17px; left: 30px; padding: 7px 16px; border-radius: 999px; background: var(--yellow); font-weight: 800; font-size: 14px; letter-spacing: .03em; text-transform: uppercase; color: var(--ink); }
+.rate__title { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 36px; line-height: 1; text-transform: uppercase; color: var(--ink); }
+.rate__price { margin-top: 20px; padding-bottom: 22px; border-bottom: 1.5px solid var(--line); }
+.rate__price b { display: block; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 76px; line-height: .95; color: var(--red); }
+.rate__price span { display: block; margin-top: 6px; font-weight: 600; font-size: 17px; color: var(--muted); }
+.rate__features { display: grid; gap: 9px; margin: 22px 0 28px; font-size: 16px; line-height: 1.35; color: var(--text); }
+.rate__features li { position: relative; padding-left: 26px; }
+.rate__features li::before { content: ""; position: absolute; left: 2px; top: .35em; width: 14px; height: 14px; border-radius: 50%; background: var(--red); box-shadow: inset 0 0 0 4px #fde3da; }
+.rate__features .rate__hero { margin-top: 8px; padding-left: 0; font-weight: 800; color: var(--ink); }
+.rate__features .rate__hero:first-child { margin-top: 0; }
+.rate__features .rate__hero::before { display: none; }
+.rate__features .rate__bright { font-weight: 600; color: var(--ink); }
+.rate .btn { min-height: 60px; margin-top: auto; font-size: 18px; }
+.rate__alt { display: block; margin-top: 14px; font-size: 14px; text-align: center; text-decoration: underline; text-underline-offset: 3px; color: var(--muted); }
+.rate--featured { border-color: var(--red); background: var(--red); box-shadow: 0 22px 46px rgba(206, 44, 1, .3); color: var(--white); }
+.rate--featured .rate__title, .rate--featured .rate__price b, .rate--featured .rate__features, .rate--featured .rate__hero, .rate--featured .rate__bright { color: var(--white); }
+.rate--featured .rate__price { border-color: rgba(255, 255, 255, .3); }
+.rate--featured .rate__price span, .rate--featured .rate__alt { color: rgba(255, 255, 255, .85); }
+.rate--featured .rate__features li::before { background: var(--yellow); box-shadow: inset 0 0 0 4px #ffe48a; }
+.solo { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 36px; align-items: center; margin-top: 28px; padding: 26px 34px; border: 1.5px solid var(--line); border-radius: 22px; background: #f8f6f3; }
+.solo__title { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 34px; line-height: 1; text-transform: uppercase; color: var(--ink); }
+.solo__text p { margin-top: 6px; font-size: 16px; color: var(--text); }
+.solo__price { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 58px; line-height: 1; white-space: nowrap; color: var(--ink); }
+.solo__btn { min-height: 58px; padding: 0 30px; font-size: 18px; white-space: nowrap; }
+
+/* ==========================================================================
+   6. ПОДВАЛ — стандартный для лендингов «Шагай Дома» (как на Антиотёке):
+   красная карточка, телефоны, документы, реквизиты, соцсети
+   ========================================================================== */
+.footer { padding: 40px 0 24px; background: var(--white); color: var(--white); }
+.footer__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; margin: 0 20px; padding: 60px 60px 40px; border-radius: 15px; background: var(--red); }
+.footer__brand { margin-bottom: 28px; font-family: 'Unbounded', var(--font-b); font-weight: 500; font-size: 45px; line-height: 1.15; color: var(--white); }
+.footer__phones { margin-bottom: 28px; font-size: 15px; }
+.footer__phones a { color: var(--white); }
+.footer__phones-title { margin-bottom: 8px; font-weight: 600; }
+.footer__phones p { margin: 4px 0; opacity: .85; }
+.footer__links { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.footer__links a { color: var(--white); opacity: .85; }
+.footer__col--legal p { margin: 6px 0; font-size: 14px; opacity: .85; }
+.footer__socials { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
+.footer__socials a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, .18); color: var(--white); transition: background .2s, color .2s, transform .15s; }
+.footer__socials svg { display: block; width: 22px; height: 22px; fill: currentColor; }
+.footer__bottom { margin-top: 24px; padding-top: 12px; }
+.footer__bottom-inner { font-size: 13px; text-align: center; color: var(--ink); opacity: .7; }
+@media (hover: hover) {
+  .footer__links a:hover { opacity: 1; color: var(--yellow); }
+  .footer__socials a:hover { background: var(--white); color: var(--red); transform: translateY(-2px); }
+}
 
 /* ==========================================================================
    АДАПТИВ — четыре режима, переопределения в конце файла:
@@ -203,12 +263,27 @@ svg { display: block; }
   .stats span { font-size: 16px; white-space: normal; }
   .stats svg { width: 32px; height: 32px; }
 
-  .tariffs { grid-template-columns: minmax(0, .62fr) minmax(0, 1.4fr); }
-  .tariffs__title { grid-column: 1 / -1; }
-  .tariffs__title br { display: none; }
+}
+
+/* компактный десктоп: в карточках тарифов теснее */
+@media (max-width: 1199px) {
+  .clips { gap: 16px; }
+  .clip__meta { padding: 16px 16px 18px; column-gap: 12px; }
+  .clip__name { font-size: 26px; }
+  .rates { gap: 16px; }
+  .rate { padding: 38px 22px 22px; }
+  .rate__title { font-size: 30px; }
+  .rate__price b { font-size: 64px; }
+  .rate__features { font-size: 15px; }
 }
 
 @media (max-width: 979px) {
+  #try { padding: 80px 0; }
+  .clips { grid-template-columns: minmax(0, 1fr); gap: 20px; max-width: 640px; }
+  #tariffs { padding: 80px 0 60px; }
+  .rates { grid-template-columns: minmax(0, 1fr); gap: 34px; max-width: 560px; margin-inline: auto; }
+  .solo { grid-template-columns: minmax(0, 1fr) auto; max-width: 560px; margin-inline: auto; gap: 14px 24px; }
+  .solo__text { grid-column: 1 / -1; }
   .wrap { width: min(100% - 48px, var(--wrap)); }
   .hero { padding-bottom: 70px; }
   .hero__grid { grid-template-columns: minmax(0, 1fr); }
@@ -229,12 +304,19 @@ svg { display: block; }
   .coach__img { left: 50%; transform: translateX(-50%); bottom: -40px; height: 470px; }
   .coach__content { padding: 20px 0 10px; }
 
-  .tariffs { grid-template-columns: minmax(0, 1fr); }
-  .tcard { max-width: 520px; width: 100%; margin-inline: auto; }
-  .tcard--club { max-width: none; }
 }
 
 @media (max-width: 599px) {
+  #try { padding: 64px 0 70px; }
+  .try__title { font-size: 12.6vw; }
+  .try__lead { font-size: 17px; }
+  .clip__name { font-size: 24px; }
+  #tariffs { padding: 64px 0 50px; }
+  .tariffs__title { font-size: 13vw; }
+  .rate { padding: 36px 20px 20px; }
+  .rate__price b { font-size: 60px; }
+  .solo { grid-template-columns: minmax(0, 1fr); padding: 22px 20px; }
+  .solo__btn { width: 100%; }
   .wrap { width: min(100% - 32px, var(--wrap)); }
   body { font-size: 16px; }
   .hero { padding-top: 20px; }
@@ -292,19 +374,13 @@ svg { display: block; }
   .coach__visual { min-height: 360px; }
   .coach__img { height: 400px; bottom: -30px; }
 
-  #tariffs { padding: 64px 0 80px; }
-  .tariffs__title { font-size: 13vw; white-space: normal; }
-  .tariffs__title br { display: inline; }
-  .tcard--club { padding: 22px 16px; }
-  .tcard__name { font-size: 30px; }
   /* сроки клуба на телефоне — строками: срок слева, цена справа */
-  .terms { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .term { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 14px 14px; text-align: left; }
-  .term + .term::before { display: none; }
-  .term .tcard__term, .term .tcard__price { margin: 0; }
-  .term .tcard__price { font-size: 46px; }
-  .term__badge { top: -9px; left: 14px; transform: none; }
-  .tcard--club .tcard__btn { font-size: 20px; }
+}
+
+@media (max-width: 900px) { .footer__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+@media (max-width: 768px) {
+  .footer__brand { font-size: 30px; }
+  .footer__grid { margin: 0 12px; padding: 36px 28px 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; } }

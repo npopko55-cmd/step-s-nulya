@@ -368,10 +368,10 @@ def pos(patt):
     return m.start()
 
 
-cuts = [pos(r'<section[^>]*id="top"'), pos(r'<section[^>]*id="why"'), pos(r'<section[^>]*id="plan"'),
-        pos(r'<section[^>]*id="coach"'), pos(r'<section[^>]*id="tariffs"'), len(body)]
+cuts = [pos(r'<section[^>]*id="top"'), pos(r'<section[^>]*id="why"'), pos(r'<section[^>]*id="plan"'), pos(r'<section[^>]*id="try"'),
+        pos(r'<section[^>]*id="coach"'), pos(r'<section[^>]*id="tariffs"'), pos(r'<footer'), len(body)]
 labels = ["первый экран", "кардио может быть зажигательным",
-          "освой степ за 7 тренировок", "тренер Константин Баев", "тарифы"]
+          "освой степ за 7 тренировок", "попробуй и оцени сложность", "тренер Константин Баев", "тарифы", "подвал"]
 for i in range(len(labels)):
     chunk = body[cuts[i]:cuts[i+1]]
     files.append((f"block-{i+1}.html",

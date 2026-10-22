@@ -39,31 +39,9 @@
     try { if (typeof window.ym === 'function') window.ym(METRIKA_ID, 'reachGoal', 'step-' + el.getAttribute('data-goal')); } catch (err) {}
   });
 
-  /* ---------- Срок клубного тарифа ----------
-     Колонки «3 / 6 / 12 месяцев» работают как радиокнопки: выбранная
-     подсвечивается, жёлтая кнопка ведёт на оплату выбранного срока. */
-  var terms = document.querySelectorAll('.tcard--club .term');
-  var cta = document.getElementById('clubCta');
-  function select(btn) {
-    for (var i = 0; i < terms.length; i++) {
-      var on = terms[i] === btn;
-      terms[i].classList.toggle('is-on', on);
-      terms[i].setAttribute('aria-checked', on ? 'true' : 'false');
-      terms[i].setAttribute('tabindex', on ? '0' : '-1');
-    }
-    if (cta) cta.setAttribute('href', withUtm(btn.getAttribute('data-href')));
-  }
-  for (var s = 0; s < terms.length; s++) {
-    terms[s].addEventListener('click', function () { select(this); });
-    terms[s].addEventListener('keydown', function (e) {
-      var list = Array.prototype.slice.call(terms), idx = list.indexOf(this), to = -1;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (idx + 1) % list.length;
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (idx - 1 + list.length) % list.length;
-      if (to > -1) { e.preventDefault(); select(list[to]); list[to].focus(); }
-    });
-  }
-  var on = document.querySelector('.tcard--club .term.is-on');
-  if (on) select(on);
+  /* ---------- Год в подвале ---------- */
+  var year = document.getElementById('footerYear');
+  if (year) year.textContent = new Date().getFullYear();
 
   /* ---------- Плавный переход по якорям (на Тильде scroll-behavior не доходит) ---------- */
   document.addEventListener('click', function (e) {

@@ -115,10 +115,9 @@ svg { display: block; }
 .plan { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.45fr); gap: 40px; align-items: center; }
 .plan__title { font-size: clamp(50px, 5.6vw, 82px); color: var(--ink); white-space: nowrap; }
 .steps { display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr) 44px minmax(0, 1fr); align-items: center; }
-.step { display: flex; flex-direction: column; min-height: 278px; padding: 26px 26px 24px; background: var(--white); border: 1.5px solid var(--line); border-radius: 18px; box-shadow: 0 12px 30px rgba(0, 0, 0, .06); }
-.step .num { font-size: 86px; color: var(--red); }
-.step__label { margin-top: 6px; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 31px; line-height: 1; text-transform: uppercase; color: var(--red); }
-.step__range { margin-top: 4px; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 72px; line-height: .95; color: var(--ink); }
+.step { display: flex; flex-direction: column; min-height: 236px; padding: 26px 28px 26px; background: var(--white); border: 1.5px solid var(--line); border-radius: 18px; box-shadow: 0 12px 30px rgba(0, 0, 0, .06); }
+.step__label { margin-top: 4px; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 32px; line-height: 1; text-transform: uppercase; color: var(--ink); }
+.step__range { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 100px; line-height: .9; color: var(--red); }
 .step__text { margin-top: 10px; font-weight: 600; font-size: 21px; line-height: 1.2; color: var(--text); }
 .steps__arrow { display: grid; place-items: center; }
 .steps__arrow svg { width: 34px; height: 34px; color: var(--red); }
@@ -370,11 +369,11 @@ svg { display: block; }
   .plan__title { font-size: 12.6vw; white-space: normal; }
   .plan__title br { display: inline; }
   .steps { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .step { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "num label" "num range" "num text"; column-gap: 20px; min-height: 0; padding: 20px 22px; }
-  .step .num { grid-area: num; align-self: center; font-size: 74px; }
-  .step__label { grid-area: label; margin: 0; font-size: 24px; }
-  .step__range { grid-area: range; font-size: 54px; }
-  .step__text { grid-area: text; margin-top: 4px; font-size: 17px; }
+  /* телефон: «1–2» крупно слева, «тренировки» и описание справа */
+  .step { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "range label" "range text"; column-gap: 18px; align-items: center; min-height: 0; padding: 18px 22px; }
+  .step__range { grid-area: range; font-size: 68px; }
+  .step__label { grid-area: label; align-self: end; margin: 0; font-size: 26px; }
+  .step__text { grid-area: text; align-self: start; margin-top: 4px; font-size: 17px; }
   .step__text br { display: none; }
   .steps__arrow { height: 34px; }
   .steps__arrow svg { width: 28px; height: 28px; transform: rotate(90deg); }

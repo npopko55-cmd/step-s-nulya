@@ -170,11 +170,11 @@ svg { display: block; }
 
 /* ==========================================================================
    5. ТАРИФЫ — как на остальных лендингах «Шагай»: три карточки
-   «интенсив + клуб», средняя — «Хит продаж» на красном; ниже «только СТЕП»
+   «интенсив + клуб», средняя — «Хит продаж» на красном; над ними «только СТЕП»
    ========================================================================== */
 #tariffs { padding: 90px 0 70px; }
 .tariffs__title { font-size: clamp(46px, 5.6vw, 82px); color: var(--ink); }
-.rates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; margin-top: 56px; }
+.rates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; margin-top: 52px; }
 .rate { position: relative; display: flex; flex-direction: column; padding: 40px 30px 26px; border: 1.5px solid var(--line); border-radius: 22px; background: var(--white); box-shadow: 0 14px 34px rgba(0, 0, 0, .07); }
 .rate__badge { position: absolute; top: -17px; left: 30px; padding: 7px 16px; border-radius: 999px; background: var(--yellow); font-weight: 800; font-size: 14px; letter-spacing: .03em; text-transform: uppercase; color: var(--ink); }
 .rate__title { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 36px; line-height: 1; text-transform: uppercase; color: var(--ink); }
@@ -195,7 +195,7 @@ svg { display: block; }
 .rate--featured .rate__price { border-color: rgba(255, 255, 255, .3); }
 .rate--featured .rate__price span, .rate--featured .rate__alt { color: rgba(255, 255, 255, .85); }
 .rate--featured .rate__features li::before { background: var(--yellow); box-shadow: inset 0 0 0 4px #ffe48a; }
-.solo { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 36px; align-items: center; margin-top: 28px; padding: 26px 34px; border: 1.5px solid var(--line); border-radius: 22px; background: #f8f6f3; }
+.solo { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 36px; align-items: center; margin-top: 40px; padding: 26px 34px; border: 1.5px solid var(--line); border-radius: 22px; background: #f8f6f3; }
 .solo__title { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 34px; line-height: 1; text-transform: uppercase; color: var(--ink); }
 .solo__text p { margin-top: 6px; font-size: 16px; color: var(--text); }
 .solo__price { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 58px; line-height: 1; white-space: nowrap; color: var(--ink); }

@@ -8,9 +8,14 @@
 Здесь CSS и JS вставляются прямо в блоки, поэтому вёрстка не зависит ни от
 какого внешнего домена.
 
-Картинки остаются на CDN, пока их не загрузят в Тильду. Как загрузят —
-вписать адреса в tilda-assets.json (ключ = путь вида assets/hero/x.webp),
-и они подставятся автоматически.
+Ни одного обращения к GitHub в блоках нет — сборка падает, если найдёт хоть одно:
+  • свои картинки (Костя, Шагай.FM, дым) едут ВНУТРИ блоков — строкой base64
+    в отдельных блоках «картинки, часть N», порезанных под лимит;
+  • фото «до/после» берутся с CDN самой Тильды (static/thb.tildacdn.com) —
+    они уже лежат на walk-walk.ru; адреса в tilda-assets.json;
+  • видео связок — только через Kinescope: ссылки вписываются в
+    tilda-assets.json (ключ assets/v4/svyazka-N.mp4); пока их нет, блок
+    «попробуй и оцени сложность» в сборку не попадает.
 
 Порядок вставки на странице: сначала СТИЛИ, потом блоки разметки,
 СКРИПТ — последним.
@@ -22,7 +27,6 @@ from pathlib import Path
 
 BASE = Path(__file__).parent
 LIMIT = 30000
-CDN = "https://npopko55-cmd.github.io/step-s-nulya"
 OUT = BASE / "tilda-standalone"
 OUT.mkdir(exist_ok=True)
 
@@ -132,20 +136,16 @@ def clean_css(text):
 
 
 css_min = clean_css(css)
-# Картинки из CSS (фон красных полос) — тоже по полному адресу: относительный
-# путь на странице Тильды указывал бы в никуда, а в локальной симуляции
-# это не видно, потому что она лежит рядом с assets/.
-_css_map = {}
-_mf = BASE / "tilda-assets.json"
-if _mf.exists():
-    import json as _json
-    _css_map = _json.loads(_mf.read_text(encoding="utf-8"))
-css_min = re.sub(r'url\((["\']?)(assets/[^)"\']+)\1\)',
-                 lambda m: 'url(' + _css_map.get(m.group(2), CDN + '/' + m.group(2)) + ')', css_min)
+# Картинок в CSS быть не должно: на Тильде страница ничего не тянет со стороны
+if re.search(r'url\((["\']?)assets/', css_min):
+    raise SystemExit("В CSS осталась картинка из assets/ — на Тильде её взять неоткуда")
 print(f"CSS: {len(css)/1024:.1f} КБ -> {len(css_min)/1024:.1f} КБ (мусор от базового лендинга вычищен)")
 
 
-# ---------- 2. Адреса картинок -----------------------------------------
+# ---------- 2. Картинки и видео — без внешнего хостинга ------------------
+import io
+from PIL import Image
+
 asset_map = {}
 map_file = BASE / "tilda-assets.json"
 if map_file.exists():
@@ -154,29 +154,61 @@ if map_file.exists():
 body = re.search(r"<body[^>]*>(.*?)</body>", html, re.DOTALL).group(1)
 body = re.sub(r"<!--.*?-->", "", body, flags=re.DOTALL)
 
-
-def sub_single(m):
-    attr, path = m.group(1), m.group(2)
-    return f'{attr}="{asset_map.get(path, CDN + "/" + path)}"'
-
-
-def sub_set(m):
-    attr, val = m.group(1), m.group(2)
-    out = []
-    for item in val.split(","):
-        item = item.strip()
-        if not item:
-            continue
-        bits = item.split(None, 1)
-        url = asset_map.get(bits[0], CDN + "/" + bits[0]) if bits[0].startswith("assets/") else bits[0]
-        out.append(url + ((" " + bits[1]) if len(bits) > 1 else ""))
-    return f'{attr}="' + ", ".join(out) + '"'
+# Свои картинки — внутрь блоков. Размер — по самому крупному показу на сайте,
+# качество подобрано так, чтобы на глаз не отличалось от оригинала.
+INLINE = {
+    "assets/v4/hero.webp":  {"key": "hero",  "max_h": 1100, "q": 66},
+    "assets/v4/coach.webp": {"key": "coach", "max_w": 820,  "q": 66},
+    "assets/v4/fm.webp":    {"key": "fm",    "max_h": 560,  "q": 68},
+    "assets/v4/smoke.webp": {"key": "smoke", "max_w": 520,  "q": 40},
+    # превью связки в карточке «Моя неделя» — карточка шириной ~270 px
+    "assets/v4/svyazka-1.webp": {"key": "week", "max_w": 560, "q": 60},
+}
+PIXEL = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+inline_data = {}
 
 
-# poster у видео — такой же адрес ресурса, как src; без него первый кадр
-# не подхватится, и на месте видео будет пустота, пока оно грузится
-body = re.sub(r'(href|src|poster)="(assets/[^"]+)"', sub_single, body)
-body = re.sub(r'(srcset|imagesrcset)="([^"]+)"', sub_set, body)
+def encode(path, spec):
+    im = Image.open(BASE / path); im.load()
+    w, h = im.size
+    k = min(1, spec.get("max_w", w) / w, spec.get("max_h", h) / h)
+    if k < 1:
+        im = im.resize((round(w * k), round(h * k)), Image.LANCZOS)
+    buf = io.BytesIO()
+    im.save(buf, "WEBP", quality=spec["q"], method=6)
+    return base64.b64encode(buf.getvalue()).decode("ascii")
+
+
+def sub_img(m):
+    path = m.group(1)
+    if path in INLINE:
+        key = INLINE[path]["key"]
+        if key not in inline_data:
+            inline_data[key] = encode(path, INLINE[path])
+        # прозрачная точка-заглушка; настоящая картинка встаёт из блоков «картинки»
+        return f'src="{PIXEL}" data-shd-img="{key}"'
+    if path in asset_map:
+        return f'src="{asset_map[path]}"'
+    raise SystemExit(f"Картинке {path} нет места на Тильде: впишите адрес в tilda-assets.json или в INLINE")
+
+
+# Видео: только Kinescope. Нет ссылок — блок со связками в сборку не идёт.
+videos = re.findall(r'<video[^>]*src="(assets/[^"]+)"', body)
+have_video = bool(videos) and all(v in asset_map for v in videos)
+
+
+def sub_video(m):
+    src = asset_map[m.group(1)]
+    return (f'<iframe src="{src}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" '
+            f'allowfullscreen frameborder="0" style="display:block;width:100%;height:100%;border:0"></iframe>')
+
+
+if have_video:
+    body = re.sub(r'<video[^>]*src="(assets/[^"]+)"[^>]*></video>', sub_video, body)
+else:
+    body = re.sub(r'<section[^>]*id="try".*?</section>\s*', "", body, flags=re.DOTALL)
+    print("!! Видео связок без ссылок Kinescope — блок «попробуй и оцени сложность» в сборку не включён")
+body = re.sub(r'src="(assets/[^"]+)"', sub_img, body)
 # внешние подключения больше не нужны — всё внутри блоков
 body = re.sub(r'<link rel="stylesheet"[^>]*styles\.css[^>]*>\s*', "", body)
 body = re.sub(r'<script[^>]*script\.js[^>]*></script>\s*', "", body)
@@ -360,6 +392,29 @@ CSS_CHUNK = (LIMIT - 3000) * 3 // 4   # с запасом: впритык к л�
 for i, part in enumerate(split_css(css_scoped, CSS_CHUNK), 1):
     files.append((f"style-{i}.html", (head if i == 1 else "") + css_capsule(part)))
 
+# Картинки: каждая — строка base64, порезанная на куски под лимит блока.
+# Первый блок ещё и объявляет shdImg(): она ставит готовые картинки на место;
+# её зовут блоки разметки и финальный скрипт.
+IMG_HEAD = ("<script>window.shdImg=function(){var d=window.SHD_IMG||{};"
+            "[].forEach.call(document.querySelectorAll('img[data-shd-img]'),function(i){"
+            "var k=i.getAttribute('data-shd-img');"
+            "if(d[k]&&i.getAttribute('data-shd-on')!=='1'){i.src='data:image/webp;base64,'+d[k];i.setAttribute('data-shd-on','1');}});};</script>\n")
+IMG_CHUNK = LIMIT - 1500
+img_blocks, cur = [], ""
+for key, data in inline_data.items():
+    pos_ = 0
+    while pos_ < len(data):
+        room = IMG_CHUNK - len(cur) - 200
+        if room < 2000:
+            img_blocks.append(cur); cur = ""; continue
+        piece = data[pos_:pos_ + room]; pos_ += len(piece)
+        cur += ('<script>(function(w){var d=w.SHD_IMG=w.SHD_IMG||{};d["%s"]=(d["%s"]||"")+"%s";})(window);</script>\n'
+                % (key, key, piece))
+if cur:
+    img_blocks.append(cur)
+for i, chunk in enumerate(img_blocks, 1):
+    files.append((f"img-{i}.html", (IMG_HEAD if i == 1 else "") + chunk))
+
 
 def pos(patt):
     m = re.search(patt, body)
@@ -368,18 +423,27 @@ def pos(patt):
     return m.start()
 
 
-cuts = [pos(r'<section[^>]*id="top"'), pos(r'<section[^>]*id="why"'), pos(r'<section[^>]*id="plan"'), pos(r'<section[^>]*id="try"'),
-        pos(r'<section[^>]*id="coach"'), pos(r'<section[^>]*id="tariffs"'),
-        pos(r'<section[^>]*id="freedom"'), pos(r'<section[^>]*id="inside"'), pos(r'<section[^>]*id="cases"'), pos(r'<footer'), len(body)]
-labels = ["первый экран", "кардио может быть зажигательным",
-          "освой степ за 7 тренировок", "попробуй и оцени сложность", "тренер Константин Баев", "тарифы",
-          "клуб — свобода, удобство, удовольствие", "занимайтесь как удобно", "до и после", "подвал"]
+SECTIONS = [("top", "первый экран"), ("why", "кардио может быть зажигательным"),
+            ("plan", "освой степ за 7 тренировок"), ("try", "попробуй и оцени сложность"),
+            ("coach", "тренер Константин Баев"), ("tariffs", "тарифы"),
+            ("freedom", "клуб — свобода, удобство, удовольствие"), ("inside", "занимайтесь как удобно"),
+            ("cases", "до и после")]
+SECTIONS = [(sid, lab) for sid, lab in SECTIONS if re.search(f'<section[^>]*id="{sid}"', body)]
+cuts = [pos(f'<section[^>]*id="{sid}"') for sid, _ in SECTIONS] + [pos(r'<footer'), len(body)]
+labels = [lab for _, lab in SECTIONS] + ["подвал"]
 for i in range(len(labels)):
     chunk = body[cuts[i]:cuts[i+1]]
+    tail = '\n<script>window.shdImg&&shdImg()</script>' if 'data-shd-img=' in chunk else ''
     files.append((f"block-{i+1}.html",
-                  '<div class="shd-step">\n' + to_entities(chunk) + '\n</div>\n'))
+                  '<div class="shd-step">\n' + to_entities(chunk) + '\n</div>' + tail + '\n'))
 
-files.append(("script.html", "<script>\n" + js_for_tilda(js) + "\n</script>\n"))
+files.append(("script.html", "<script>\n" + js_for_tilda(js) + "\nwindow.shdImg&&shdImg();\n</script>\n"))
+
+# Проверка: в блоках не должно быть ни одного обращения к GitHub и к assets/
+for _n, _c in files:
+    if re.search(r"github|assets/", _c, re.I):
+        raise SystemExit(f"В {_n} осталась внешняя ссылка: " + re.search(r".{0,60}(github|assets/).{0,60}", _c, re.I).group(0))
+
 
 for stale in OUT.glob("*.html"):     # от прошлых сборок могли остаться лишние блоки
     stale.unlink()
@@ -395,8 +459,7 @@ for name, content in files:
         label = "  — " + labels[int(name[6:-5]) - 1]
     print(f"  {name:16} {n:>7,} chars ({n/1024:5.1f} KB)  {flag}{label}")
 print(f"\nВсего блоков: {len(files)}. Порядок: стили -> разметка -> скрипт.")
-missing = [a for a in sorted(set(re.findall(r'assets/[\w./-]+', html + css))) if a not in asset_map]
-print(f"Картинок пока с внешнего CDN: {len(missing)} (вписать адреса в tilda-assets.json, когда загрузят в Тильду)")
+print(f"Свои картинки внутри блоков: {', '.join(inline_data)}; фото «до/после» — с CDN Тильды. Ссылок на GitHub: 0")
 
 
 # ---------- 4. Папка «ДЛЯ ТИЛЬДЫ» — то, что уходит человеку -------------
@@ -409,6 +472,8 @@ _k = 1
 for _name, _c in files:
     if _name.startswith("style-"):
         HUMAN[_name] = f"{_k:02d} — стили, часть {_name[6:-5]}"
+    elif _name.startswith("img-"):
+        HUMAN[_name] = f"{_k:02d} — картинки, часть {_name[4:-5]}"
     elif _name.startswith("block-"):
         HUMAN[_name] = f"{_k:02d} — " + labels[int(_name[6:-5]) - 1]
     else:
@@ -432,15 +497,19 @@ readme = """СТЕП С НУЛЯ — блоки для Тильды
 ==============================
 
 Вставлять В ЭТОМ ПОРЯДКЕ, каждый файл — в отдельный блок T123 (HTML-код).
-Порядок важен: стили идут первыми, скрипт — последним.
+Порядок важен: стили, потом «картинки», потом разметка, скрипт — последним.
 
 """ + "\n".join(f"  {name}" for name in order) + """
 
 ВАЖНО: то, что стоит на странице от прошлой сборки, нужно удалить полностью —
 блоки не «обновляются», а заменяются. Смешивать старые и новые нельзя.
 
-В этих блоках стили и скрипт лежат внутри — ничего постороннего страница не
-подгружает.
+В этих блоках стили, скрипт и картинки лежат внутри. С GitHub страница не
+берёт ничего. Фото «до/после» грузятся с CDN самой Тильды (они уже лежат на
+walk-walk.ru), шрифты — с Google Fonts, как на остальных наших лендингах.
+
+Блоки «картинки, часть N» — это фото Кости и Шагай.FM, закодированные строкой.
+На странице они ничего не показывают сами, просто должны стоять ДО разметки.
 
 Стили передаются закодированной строкой, а не обычным текстом — это не ошибка.
 Тильда переформатирует содержимое блока и может порвать обычный CSS; в
@@ -463,10 +532,11 @@ walk-walk.ru/step/tarif_3m, tarif_6m, tarif_12m (клуб на 3, 6 и 12 мес
 utm_term, erid) сами подставляются во все кнопки оплаты, в том числе в большую
 красную кнопку после выбора срока.
 
-Осталось на нашей стороне: {N} картинок пока грузятся с внешнего адреса.
-Загрузите их в Тильду и пришлите ссылки — заменим, и внешних зависимостей
-не останется совсем.
-""".replace("{N}", str(len(missing)))
+{VIDEO}
+""".replace("{VIDEO}", "" if have_video else
+    "Блока «Попробуй и оцени сложность» (видео связок) здесь нет: видео по 20–30 МБ\n"
+    "в блок не вставить, а с GitHub мы их не берём. Загрузите три видео в Kinescope\n"
+    "и пришлите ссылки — блок добавится в сборку.\n")
 (HAND / "ПРОЧТИ ПЕРВЫМ.txt").write_text(readme, encoding="utf-8")
 print(f"\nПапка «ДЛЯ ТИЛЬДЫ» обновлена: {len(order)} файлов + инструкция")
 

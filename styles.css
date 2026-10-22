@@ -9,6 +9,12 @@
   --red: #ce2c01;      /* фирменный красный «Шагай Дома», как на остальных лендингах */
   --red-deep: #b52700;
   --red-bg: #ce2c01;
+  /* фактура красных плашек — градиентами, без картинки: на Тильде страница
+     не должна тянуть ни одного файла со стороны */
+  --red-tex: radial-gradient(130% 90% at 12% 0%, rgba(255, 112, 52, .3), transparent 62%),
+             radial-gradient(120% 90% at 100% 100%, rgba(112, 10, 0, .34), transparent 60%),
+             repeating-linear-gradient(-28deg, rgba(255, 255, 255, .05) 0 1.5px, transparent 1.5px 36px),
+             repeating-linear-gradient(-28deg, rgba(0, 0, 0, .045) 0 1px, transparent 1px 23px);
   --yellow: #ffc400;
   --ink: #141414;
   --text: #2c2c2c;
@@ -62,7 +68,7 @@ svg { display: block; }
    с Костей, белой кнопкой и фактами — весь первый экран одной картинкой.
    ========================================================================== */
 .hero { position: relative; overflow: hidden; padding: 30px 0 84px; background: var(--white); }
-.hero__panel { position: absolute; z-index: 0; top: 0; right: 0; bottom: 34px; width: 47%; clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%); background: var(--red) url(assets/v4/red.webp) center / cover; }
+.hero__panel { position: absolute; z-index: 0; top: 0; right: 0; bottom: 34px; width: 47%; clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%); background: var(--red-tex), var(--red); }
 .hero__streaks { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero__smoke { position: absolute; right: -16%; bottom: -6%; width: 96%; height: auto; max-width: none; }
 .hero__vpanel { display: none; }
@@ -122,7 +128,7 @@ svg { display: block; }
   .facts { order: 8; position: relative; z-index: 6; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 24px; }
   .start { display: none; }
   /* красная панель: от груди Кости вниз до конца первого экрана, верхний край косой */
-  .hero__visual::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 30%; height: 2400px; background: var(--red) url(assets/v4/red.webp) center top / 1100px auto; clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%); }
+  .hero__visual::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 30%; height: 2400px; background: var(--red-tex), var(--red); clip-path: polygon(0 80px, 100% 0, 100% 100%, 0 100%); }
   .hero__vpanel { position: absolute; z-index: 0; display: block; top: 30%; right: 0; width: 72%; height: 70%; }
   .hero__img { left: 52%; bottom: 0; height: 100%; }
   .hero__sticker { top: 42%; left: 24px; width: 126px; height: 126px; }
@@ -164,7 +170,7 @@ svg { display: block; }
    Полосы: красная (с фактурой) и белая
    ========================================================================== */
 .band { position: relative; overflow: hidden; }
-.band--red { background: var(--red-bg) url(assets/v4/red.webp) center / cover; color: var(--white); }
+.band--red { background: var(--red-tex), var(--red-bg); color: var(--white); }
 .band--white { background: var(--white); }
 
 /* ==========================================================================
@@ -258,7 +264,7 @@ svg { display: block; }
 .rate__features .rate__bright { font-weight: 600; color: var(--ink); }
 .rate__alt { display: block; margin-top: 14px; font-size: 14px; text-align: center; text-decoration: underline; text-underline-offset: 3px; color: var(--muted); }
 /* один тариф «СТЕП + клуб»: слева что входит (на красном), справа выбор срока */
-.club { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); margin-top: 28px; overflow: hidden; border-radius: 22px; background: var(--red) url(assets/v4/red.webp) center / cover; box-shadow: 0 22px 46px rgba(206, 44, 1, .28); color: var(--white); }
+.club { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); margin-top: 28px; overflow: hidden; border-radius: 22px; background: var(--red-tex), var(--red); box-shadow: 0 22px 46px rgba(206, 44, 1, .28); color: var(--white); }
 .club__info { padding: 40px 40px 42px; }
 .club__title { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 44px; line-height: .98; text-transform: uppercase; color: var(--white); }
 .club__sub { margin-top: 12px; font-size: 17px; line-height: 1.4; color: rgba(255, 255, 255, .9); }
@@ -298,7 +304,7 @@ svg { display: block; }
 .perk { display: flex; flex-direction: column; gap: 12px; min-height: 210px; padding: 26px 24px; border-radius: 20px; background: #fdf3ea; }
 .perk b { font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 34px; line-height: .95; text-transform: uppercase; color: var(--ink); }
 .perk span { font-size: 16px; line-height: 1.4; color: var(--text); }
-.perk--red { background: var(--red) url(assets/v4/red.webp) center / cover; }
+.perk--red { background: var(--red-tex), var(--red); }
 .perk--red b, .perk--red span { color: var(--white); }
 .perk--yellow { background: var(--yellow); }
 .inside { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 40px; }
@@ -306,7 +312,7 @@ svg { display: block; }
 .tile h3 { position: relative; z-index: 1; max-width: 11em; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 38px; line-height: .95; text-transform: uppercase; }
 .tile p { position: relative; z-index: 1; max-width: 15em; margin-top: 12px; font-size: 16px; line-height: 1.4; }
 .tile--fm img { position: absolute; max-width: none; }
-.tile--plan { display: flex; flex-direction: column; background: var(--red) url(assets/v4/red.webp) center / cover; color: var(--white); }
+.tile--plan { display: flex; flex-direction: column; background: var(--red-tex), var(--red); color: var(--white); }
 .tile--plan p { max-width: 14em; }
 /* карточка «Моя неделя» — как в приложении клуба, свёрстана, а не картинкой */
 .week { align-self: flex-end; width: min(100%, 270px); margin-top: auto; padding: 14px 14px 12px; border-radius: 14px; background: var(--white); box-shadow: 0 14px 30px rgba(60, 10, 0, .3); color: var(--ink); }

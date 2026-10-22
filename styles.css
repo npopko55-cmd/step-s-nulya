@@ -558,3 +558,15 @@ svg { display: block; }
 
 /* на телефоне белая молния без контекста читается как непонятный клин — оставляем только красную панель */
 @media (max-width:979px){.hero__vpanel .hero__boltshape{display:none}}
+
+/* СТЕП выделен внутри карточки тарифов: входит в любой срок */
+.stepbox { margin-top: 22px; padding: 18px 20px 20px; border-radius: 16px; background: var(--yellow); color: var(--ink); box-shadow: 0 10px 24px rgba(80, 20, 0, .18); }
+.stepbox__k { font-weight: 800; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; color: var(--red); }
+.stepbox__t { margin-top: 4px; font-family: var(--font-x); font-weight: 900; font-style: italic; font-size: 34px; line-height: 1; text-transform: uppercase; }
+.stepbox__d { margin-top: 6px; font-weight: 600; font-size: 16px; line-height: 1.35; }
+.club .stepbox + .rate__features { margin-top: 22px; }
+@media (max-width: 599px) {
+  .stepbox { padding: 16px 16px 18px; }
+  .stepbox__t { font-size: 28px; }
+  .stepbox__d { font-size: 15px; }
+}

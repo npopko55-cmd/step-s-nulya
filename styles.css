@@ -555,3 +555,6 @@ svg { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; } }
+
+/* на телефоне белая молния без контекста читается как непонятный клин — оставляем только красную панель */
+@media (max-width:979px){.hero__vpanel .hero__boltshape{display:none}}

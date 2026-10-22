@@ -616,6 +616,14 @@ def css_escape(text):
 
 vibe_css = css_scoped.replace(":root{", ".shd-step{")
 vibe_files = []
+# Только для страницы /step в Тильде: прячем видимые блоки общей шапки и подвала
+# сайта (второй логотип, второй подвал), оставляем cookies и «Нужна помощь».
+# После загрузки шрифтов пересчитываем раскладку: Safari иначе оставляет
+# высоту карточек, посчитанную по запасному шрифту, и текст вылезает.
+FIRST_EXTRA = (
+    "<style>#rec953993826,#rec1696909601,#rec4977556901,#rec660132164,#rec660132671{display:none!important}</style>\n"
+    "<script>document.fonts&&document.fonts.ready.then(function(){var a=document.querySelectorAll('.shd-step');"
+    "for(var i=0;i<a.length;i++){a[i].style.display='none';void a[i].offsetHeight;a[i].style.display=''}});</script>\n")
 RID = {"top": 1, "why": 2, "plan": 3, "coach": 4, "tariffs": 5, "freedom": 6,
        "inside": 7, "cases": 8, "footer": 9, "try": 10}
 for i in range(len(labels)):
@@ -635,7 +643,7 @@ for i in range(len(labels)):
     block_css = css_for(classes, vibe_css).replace(".shd-step", f".shd-step.{rid}")
     # Шрифты подключаем в первом блоке: код страницы в <head> не доходит
     # до редактора, и без него Тильда рисовала заголовки Arial — текст наезжал.
-    code = (FONT_LINK + '\n' if i == 0 else '') + f'<div class="shd-step {rid}">\n' + chunk + "\n</div>\n<style>" + css_escape(block_css) + "</style>\n"
+    code = (FONT_LINK + '\n' + FIRST_EXTRA if i == 0 else '') + f'<div class="shd-step {rid}">\n' + chunk + "\n</div>\n<style>" + css_escape(block_css) + "</style>\n"
     if i == len(labels) - 1:
         code += "<script>\n" + js_for_tilda(js) + "\n</script>\n"
     if re.search(r"github|assets/|data-shd-img", code, re.I):

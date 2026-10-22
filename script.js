@@ -4,13 +4,19 @@
 (function () {
   'use strict';
 
-  /* ---------- Проброс рекламных меток в ссылки оплаты ---------- */
-  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'erid'];
+  /* ---------- Проброс рекламных меток в ссылки оплаты ----------
+     Тот же набор меток, что на остальных лендингах. Метки запоминаются на
+     время визита: если человек ушёл по якорю или перезагрузил страницу без
+     хвоста, в кнопки всё равно уйдут метки, с которыми он пришёл. */
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_referrer', 'gclid', 'yclid', 'fbclid', 'erid', 'from'];
   var DOMAIN = 'walk-walk.ru';
+  var STORE = 'walkwalk_utm';
   var params = [];
   try {
     var q = new URLSearchParams(window.location.search);
     for (var i = 0; i < KEYS.length; i++) { var v = q.get(KEYS[i]); if (v) params.push([KEYS[i], v]); }
+    if (params.length) sessionStorage.setItem(STORE, JSON.stringify(params));
+    else params = JSON.parse(sessionStorage.getItem(STORE) || '[]');
   } catch (err) {}
 
   function withUtm(href) {

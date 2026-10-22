@@ -19,6 +19,10 @@
 
 Порядок вставки на странице: сначала СТИЛИ, потом блоки разметки,
 СКРИПТ — последним.
+
+Отдельно пишется папка tilda-vibe/: те же секции как Vibe-блоки (tplid 1370)
+для загрузки через MCP Тильды — каждая секция со своими стилями, скрипт в
+последнем блоке, шрифты в head-коде страницы.
 """
 import json
 import base64
@@ -181,6 +185,8 @@ def encode(path, spec):
 
 def sub_img(m):
     path = m.group(1)
+    if path in asset_map:          # уже загружена в Тильду — берём её CDN
+        return f'src="{asset_map[path]}"'
     if path in INLINE:
         key = INLINE[path]["key"]
         if key not in inline_data:
@@ -564,3 +570,68 @@ mobile = ('<!doctype html><html lang="ru"><head><meta charset="utf-8">'
           '</style></head><body><iframe src="_preview.html"></iframe></body></html>')
 (BASE / "_preview-mobile.html").write_text(mobile, encoding="utf-8")
 print("Превью узкого экрана: _preview-mobile.html (390px внутри iframe)")
+
+
+# ---------- 6. Vibe-блоки для загрузки через MCP Тильды ------------------
+# Каждая секция — свой блок: разметка + только те правила CSS, классы которых
+# в ней есть. Переменные с :root переезжают на корень блока .shd-step.
+VIBE = BASE / "tilda-vibe"
+VIBE.mkdir(exist_ok=True)
+for old in VIBE.glob("*"):
+    old.unlink()
+js_classes = set(re.findall(r"classList\.(?:add|toggle|remove)\('([\w-]+)'", js))
+
+
+def css_for(classes, text):
+    out = []
+    for blk in parse_blocks(text):
+        if blk[0] == "raw":
+            continue
+        if blk[0] == "at":
+            head, inner = blk[1], blk[2]
+            if "keyframes" in head:
+                if any(re.search(r"animation[^;]*\b" + re.escape(head.split()[-1]) + r"\b", text) for _ in [0]):
+                    out.append(head + "{" + inner + "}")
+                continue
+            sub = css_for(classes, inner)
+            if sub:
+                out.append(head + "{" + sub + "}")
+            continue
+        sels = [x.strip() for x in blk[1].split(",")]
+        keep = [x for x in sels if not (set(re.findall(r"\.([a-z][\w-]*)", x)) - {"shd-step"})
+                or (set(re.findall(r"\.([a-z][\w-]*)", x)) - {"shd-step"}) & classes]
+        if keep:
+            out.append(",".join(keep) + "{" + blk[2] + "}")
+    return "".join(out)
+
+
+def css_escape(text):
+    return "".join(c if ord(c) < 128 else "\\%x " % ord(c) for c in text)
+
+
+vibe_css = css_scoped.replace(":root{", ".shd-step{")
+vibe_files = []
+for i in range(len(labels)):
+    chunk = re.sub(r"\n[ \t]+", "\n", body[cuts[i]:cuts[i + 1]].strip())   # отступы вёрстки блоку не нужны
+    classes = set()
+    for c in re.findall(r'class="([^"]+)"', chunk):
+        classes.update(c.split())
+    classes |= js_classes
+    # Свой корневой класс у каждого блока: общие правила (.btn и т.п.) повторяются
+    # в нескольких блоках, и без этого правило из блока ниже перебивало
+    # мобильную поправку блока выше — у кнопки тарифа «разъезжались» строки.
+    rid = f"shd-b{i+1}"
+    block_css = css_for(classes, vibe_css).replace(".shd-step", f".shd-step.{rid}")
+    code = f'<div class="shd-step {rid}">\n' + chunk + "\n</div>\n<style>" + css_escape(block_css) + "</style>\n"
+    if i == len(labels) - 1:
+        code += "<script>\n" + js_for_tilda(js) + "\n</script>\n"
+    if re.search(r"github|assets/|data-shd-img", code, re.I):
+        raise SystemExit(f"Vibe-блок {i+1}: осталась внешняя ссылка или заглушка картинки")
+    name = f"{i+1:02d}-{labels[i]}.html"
+    (VIBE / name).write_text(code, encoding="utf-8")
+    vibe_files.append((name, len(code)))
+(VIBE / "head.html").write_text(head, encoding="utf-8")
+print("\nVibe-блоки -> tilda-vibe/:")
+for n, l in vibe_files:
+    print(f"  {n:48} {l:>7,} знаков")
+print(f"  всего {sum(l for _, l in vibe_files):,} знаков")

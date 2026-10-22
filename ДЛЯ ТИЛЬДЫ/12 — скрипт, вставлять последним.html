@@ -3,12 +3,15 @@
 (function () {
   'use strict';
 
-  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'erid'];
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_referrer', 'gclid', 'yclid', 'fbclid', 'erid', 'from'];
   var DOMAIN = 'walk-walk.ru';
+  var STORE = 'walkwalk_utm';
   var params = [];
   try {
     var q = new URLSearchParams(window.location.search);
     for (var i = 0; i < KEYS.length; i++) { var v = q.get(KEYS[i]); if (v) params.push([KEYS[i], v]); }
+    if (params.length) sessionStorage.setItem(STORE, JSON.stringify(params));
+    else params = JSON.parse(sessionStorage.getItem(STORE) || '[]');
   } catch (err) {}
 
   function withUtm(href) {

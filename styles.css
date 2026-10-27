@@ -574,3 +574,6 @@ svg { display: block; }
 /* в кнопке оплаты две части текста — между ними обычный пробел, а не отступ кнопки */
 .club__btn { gap: .3em; }
 @media (max-width: 599px) { .club__btn { gap: 2px; } }
+
+/* у сроков с клубом — явная приписка, что клуб входит полностью */
+.term__club { display: block; margin-bottom: 2px; font-weight: 700; color: var(--red); }
